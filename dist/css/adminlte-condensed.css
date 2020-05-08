@@ -1,0 +1,126 @@
+.form-control {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  height: calc(1.7rem + 2px);
+  font-size: .9rem;
+}
+
+select.form-control {
+  padding: 0;
+}
+
+select.form-control > option {
+  padding-left: .25rem;
+}
+
+.form-group label {
+  font-size: .8rem;
+  margin-bottom: 0 !important;
+}
+
+.input-group-text {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  font-size: .8rem;
+  height: calc(1.7rem + 2px);
+  align-items: normal;
+  padding: .4rem;
+}
+
+.input-group > .input-group-prepend .input-group-text {
+  line-height: 1;
+}
+
+.custom-file-input {
+  height: calc(1.7rem + 2px);
+}
+
+.custom-file-label {
+  height: calc(1.7rem + 2px);
+}
+
+.custom-file-label::after {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  height: calc(1.7rem + 1px);
+  border-bottom: 1px solid #ced4da;
+}
+
+.btn {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  line-height: 1;
+  font-size: .8rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+}
+
+.form-check .form-check-input {
+  position: static;
+  margin-top: 0;
+  margin-left: 0;
+}
+
+.card-header {
+  padding: 0.35rem 0.5rem;
+}
+
+.card-body {
+  padding: .5rem
+}
+
+.card-title {
+  font-size: 1rem;
+}
+
+.form-group {
+  margin: 0;
+}
+
+.form-group .custom-control {
+  display: flex;
+  align-items: center;
+}
+
+.form-group .custom-control custom-control-label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.form-group .custom-control custom-control-label::before {
+  margin: auto
+}
+
+.custom-control-label::after {
+  /* content: none; */
+}
+
+.content-header {
+  padding: .2rem .5rem;
+}
+
+.navbar {
+  padding: .2rem .5rem;
+}
+
+.main-header .nav-link {
+  height: 2rem;
+}
+
+.navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.main-footer {
+  padding: .3rem
+}
