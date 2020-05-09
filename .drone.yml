@@ -1,0 +1,79 @@
+---
+  kind: pipeline
+  type: docker
+  
+  steps:
+    - name: build
+      image: node:12
+      commands:
+        - npm install & npm production
+  
+    - name: release_dev
+      image: plugins/docker
+      when:
+        branch:
+          - master
+        event:
+          - push
+      settings:
+        repo: registry.ubu-002.km8.es/admin-lte-dev
+        registry: registry.ubu-002.km8.es
+        username:
+          from_secret: docker_repo_user
+        password:
+          from_secret: docker_repo_password
+  
+    - name: deploy_dev
+      image: appleboy/drone-ssh
+      when:
+        branch:
+          - master
+        event:
+          - push
+      settings:
+        host: web-01.km8.es
+        port: 22
+        username:
+          from_secret: web-01_ssh_user
+        key:
+          from_secret: web-01_ssh_key
+        passphrase:
+          from_secret: web-01_ssh_passphrase
+        script:
+          - cd /srv/docker/admin-lte
+          - docker-compose down
+          - docker-compose pull
+          - docker-compose up -d
+  
+    # - name: release
+    #   image: plugins/docker
+    #   when:
+    #     event:
+    #       - tag
+    #   settings:
+    #     repo: registry.ubu-002.km8.es/babetti
+    #     registry: registry.ubu-002.km8.es
+    #     username:
+    #       from_secret: docker_repo_user
+    #     password:
+    #       from_secret: docker_repo_password
+    
+    # - name: deploy
+    #   image: appleboy/drone-ssh
+    #   when:
+    #     event:
+    #       - tag
+    #   settings:
+    #     host: web-01.km8.es
+    #     port: 22
+    #     username:
+    #       from_secret: web-01_ssh_user
+    #     key:
+    #       from_secret: web-01_ssh_key
+    #     passphrase:
+    #       from_secret: web-01_ssh_passphrase
+    #     script:
+    #       - cd /srv/docker/babetti
+    #       - docker-compose down
+    #       - docker-compose pull
+    #       - docker-compose up -d
