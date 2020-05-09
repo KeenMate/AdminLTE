@@ -6,7 +6,8 @@
     - name: build
       image: node:12
       commands:
-        - npm install & npm production
+        - npm install
+        - npm production
   
     - name: release_dev
       image: plugins/docker
