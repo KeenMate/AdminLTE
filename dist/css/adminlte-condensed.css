@@ -1,3 +1,52 @@
+/* GLOBALS */
+body {
+  font-size: 0.9rem;
+}
+
+/* NAVIGATION */
+.navbar {
+  padding: .2rem .5rem;
+}
+
+.nav-link {
+  padding: 0.15rem 1rem;
+}
+
+.nav-sidebar > .nav-item .nav-icon
+{
+  margin-right: 0;
+}
+
+li.nav-item.has-treeview > ul.nav {
+  padding-left: .35rem;
+}
+
+.nav-sidebar .nav-link > .right, .nav-sidebar .nav-link > p > .right
+{
+  top: .3rem;
+}
+
+.main-header .nav-link {
+  height: 2rem;
+}
+
+.navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.main-footer {
+  padding: .3rem
+}
+
+
+/* FORMS and FORM CONTROLS */
+
 .form-control {
   padding-left: .3rem;
   padding-right: .3rem;
@@ -13,24 +62,6 @@ select.form-control > option {
   padding-left: .25rem;
 }
 
-.form-group label {
-  font-size: .8rem;
-  margin-bottom: 0 !important;
-}
-
-.input-group-text {
-  padding-left: .3rem;
-  padding-right: .3rem;
-  font-size: .8rem;
-  height: calc(1.7rem + 2px);
-  align-items: normal;
-  padding: .4rem;
-}
-
-.input-group > .input-group-prepend .input-group-text {
-  line-height: 1;
-}
-
 .custom-file-input {
   height: calc(1.7rem + 2px);
 }
@@ -44,6 +75,10 @@ select.form-control > option {
   padding-right: .3rem;
   height: calc(1.7rem + 1px);
   border-bottom: 1px solid #ced4da;
+}
+
+textarea {
+  min-height: 80px;
 }
 
 .btn {
@@ -79,6 +114,7 @@ select.form-control > option {
 
 .form-group {
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .form-group .custom-control {
@@ -95,6 +131,25 @@ select.form-control > option {
   margin: auto
 }
 
+.form-group label {
+  font-size: .8rem;
+  margin-bottom: 0 !important;
+}
+
+.input-group-text {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  font-size: .8rem;
+  height: calc(1.7rem + 2px);
+  align-items: normal;
+  padding: .4rem;
+}
+
+.input-group > .input-group-prepend .input-group-text {
+  line-height: 1;
+}
+
+
 .custom-control-label::after {
   /* content: none; */
 }
@@ -103,24 +158,3 @@ select.form-control > option {
   padding: .2rem .5rem;
 }
 
-.navbar {
-  padding: .2rem .5rem;
-}
-
-.main-header .nav-link {
-  height: 2rem;
-}
-
-.navbar-nav .nav-link {
-  display: inline-flex;
-  align-items: center;
-}
-
-.navbar-expand .navbar-nav .nav-link {
-  padding-left: .5rem;
-  padding-right: .5rem;
-}
-
-.main-footer {
-  padding: .3rem
-}
