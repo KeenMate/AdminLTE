@@ -20,7 +20,7 @@ const Dropdown = (($) => {
     NAVBAR: '.navbar',
     DROPDOWN_MENU: '.dropdown-menu',
     DROPDOWN_MENU_ACTIVE: '.dropdown-menu.show',
-    DROPDOWN_TOGGLE: '[data-toggle="dropdown"]',
+    DROPDOWN_TOGGLE: '[data-toggle="dropdown"]'
   }
 
   const ClassName = {
@@ -28,8 +28,7 @@ const Dropdown = (($) => {
     DROPDOWN_RIGHT: 'dropdown-menu-right'
   }
 
-  const Default = {
-  }
+  const Default = {}
 
 
   /**
@@ -46,19 +45,19 @@ const Dropdown = (($) => {
     // Public
 
     toggleSubmenu() {
-      this._element.siblings().show().toggleClass("show")
+      this._element.siblings().show().toggleClass('show')
 
-      if (! this._element.next().hasClass('show')) {
-        this._element.parents('.dropdown-menu').first().find('.show').removeClass("show").hide()
+      if (!this._element.next().hasClass('show')) {
+        this._element.parents('.dropdown-menu').first().find('.show').removeClass('show').hide()
       }
 
-      this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-        $('.dropdown-submenu .show').removeClass("show").hide()
+      this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', (e) => {
+        $('.dropdown-submenu .show').removeClass('show').hide()
       })
     }
 
     fixPosition() {
-      let elm = $(Selector.DROPDOWN_MENU_ACTIVE)
+      const elm = $(Selector.DROPDOWN_MENU_ACTIVE)
 
       if (elm.length !== 0) {
         if (elm.hasClass(ClassName.DROPDOWN_RIGHT)) {
@@ -69,21 +68,19 @@ const Dropdown = (($) => {
           elm.css('right', 'inherit')
         }
 
-        let offset = elm.offset()
-        let width = elm.width()
-        let windowWidth = $(window).width()
-        let visiblePart = windowWidth - offset.left
+        const offset = elm.offset()
+        const width = elm.width()
+        const windowWidth = $(window).width()
+        const visiblePart = windowWidth - offset.left
 
         if (offset.left < 0) {
           elm.css('left', 'inherit')
-          elm.css('right', (offset.left - 5))
-        } else {
-          if (visiblePart < width) {
-            elm.css('left', 'inherit')
-            elm.css('right', 0)
-          }
+          elm.css('right', offset.left - 5)
+        } else if (visiblePart < width) {
+          elm.css('left', 'inherit')
+          elm.css('right', 0)
         }
-      }  
+      }
     }
 
     // Static
@@ -110,20 +107,20 @@ const Dropdown = (($) => {
    * ====================================================
    */
 
-  $(Selector.DROPDOWN_MENU + ' ' + Selector.DROPDOWN_TOGGLE).on("click", function(event) {
+  $(`${Selector.DROPDOWN_MENU} ${Selector.DROPDOWN_TOGGLE}`).on('click', function (event) {
     event.preventDefault()
     event.stopPropagation()
 
     Dropdown._jQueryInterface.call($(this), 'toggleSubmenu')
-  });
+  })
 
-  $(Selector.NAVBAR + ' ' + Selector.DROPDOWN_TOGGLE).on("click", function(event) {
+  $(`${Selector.NAVBAR} ${Selector.DROPDOWN_TOGGLE}`).on('click', (event) => {
     event.preventDefault()
 
-    setTimeout(function() {
+    setTimeout(function () {
       Dropdown._jQueryInterface.call($(this), 'fixPosition')
     }, 1)
-  });
+  })
 
   /**
    * jQuery API

@@ -30,7 +30,7 @@ const CardWidget = (($) => {
     COLLAPSING: 'collapsing-card',
     EXPANDING: 'expanding-card',
     WAS_COLLAPSED: 'was-collapsed',
-    MAXIMIZED: 'maximized-card',
+    MAXIMIZED: 'maximized-card'
   }
 
   const Selector = {
@@ -41,7 +41,7 @@ const CardWidget = (($) => {
     CARD_HEADER: '.card-header',
     CARD_BODY: '.card-body',
     CARD_FOOTER: '.card-footer',
-    COLLAPSED: `.${ClassName.COLLAPSED}`,
+    COLLAPSED: `.${ClassName.COLLAPSED}`
   }
 
   const Default = {
@@ -52,7 +52,7 @@ const CardWidget = (($) => {
     collapseIcon: 'fa-minus',
     expandIcon: 'fa-plus',
     maximizeIcon: 'fa-expand',
-    minimizeIcon: 'fa-compress',
+    minimizeIcon: 'fa-compress'
   }
 
   class CardWidget {
@@ -73,7 +73,7 @@ const CardWidget = (($) => {
           this._parent.addClass(ClassName.COLLAPSED).removeClass(ClassName.COLLAPSING)
         })
 
-      this._parent.find('> ' + Selector.CARD_HEADER + ' ' + this._settings.collapseTrigger + ' .' + this._settings.collapseIcon)
+      this._parent.find(`> ${Selector.CARD_HEADER} ${this._settings.collapseTrigger} .${this._settings.collapseIcon}`)
         .addClass(this._settings.expandIcon)
         .removeClass(this._settings.collapseIcon)
 
@@ -88,7 +88,7 @@ const CardWidget = (($) => {
           this._parent.removeClass(ClassName.COLLAPSED).removeClass(ClassName.EXPANDING)
         })
 
-      this._parent.find('> ' + Selector.CARD_HEADER + ' ' + this._settings.collapseTrigger + ' .' + this._settings.expandIcon)
+      this._parent.find(`> ${Selector.CARD_HEADER} ${this._settings.collapseTrigger} .${this._settings.expandIcon}`)
         .addClass(this._settings.collapseIcon)
         .removeClass(this._settings.expandIcon)
 
@@ -113,16 +113,16 @@ const CardWidget = (($) => {
 
       this.collapse()
     }
-    
+
     maximize() {
-      this._parent.find(this._settings.maximizeTrigger + ' .' + this._settings.maximizeIcon)
+      this._parent.find(`${this._settings.maximizeTrigger} .${this._settings.maximizeIcon}`)
         .addClass(this._settings.minimizeIcon)
         .removeClass(this._settings.maximizeIcon)
       this._parent.css({
-        'height': this._parent.height(),
-        'width': this._parent.width(),
-        'transition': 'all .15s'
-      }).delay(150).queue(function(){
+        height: this._parent.height(),
+        width: this._parent.width(),
+        transition: 'all .15s'
+      }).delay(150).queue(function () {
         $(this).addClass(ClassName.MAXIMIZED)
         $('html').addClass(ClassName.MAXIMIZED)
         if ($(this).hasClass(ClassName.COLLAPSED)) {
@@ -137,17 +137,17 @@ const CardWidget = (($) => {
     }
 
     minimize() {
-      this._parent.find(this._settings.maximizeTrigger + ' .' + this._settings.minimizeIcon)
+      this._parent.find(`${this._settings.maximizeTrigger} .${this._settings.minimizeIcon}`)
         .addClass(this._settings.maximizeIcon)
         .removeClass(this._settings.minimizeIcon)
-      this._parent.css('cssText', 'height:' + this._parent[0].style.height + ' !important;' +
-        'width:' + this._parent[0].style.width + ' !important; transition: all .15s;'
-      ).delay(10).queue(function(){
+      this._parent.css('cssText', `height:${this._parent[0].style.height} !important;` +
+        `width:${this._parent[0].style.width} !important; transition: all .15s;`
+      ).delay(10).queue(function () {
         $(this).removeClass(ClassName.MAXIMIZED)
         $('html').removeClass(ClassName.MAXIMIZED)
         $(this).css({
-          'height': 'inherit',
-          'width': 'inherit'
+          height: 'inherit',
+          width: 'inherit'
         })
         if ($(this).hasClass(ClassName.WAS_COLLAPSED)) {
           $(this).removeClass(ClassName.WAS_COLLAPSED)
@@ -195,7 +195,7 @@ const CardWidget = (($) => {
 
       if (!data) {
         data = new CardWidget($(this), _options)
-        $(this).data(DATA_KEY, typeof config === 'string' ? data: config)
+        $(this).data(DATA_KEY, typeof config === 'string' ? data : config)
       }
 
       if (typeof config === 'string' && config.match(/collapse|expand|remove|toggle|maximize|minimize|toggleMaximize/)) {

@@ -1,16 +1,14 @@
-$(function () {
-  'use strict'
-
-  var ticksStyle = {
+$(() => {
+  const ticksStyle = {
     fontColor: '#495057',
     fontStyle: 'bold'
   }
 
-  var mode      = 'index'
-  var intersect = true
+  const mode      = 'index'
+  const intersect = true
 
-  var $salesChart = $('#sales-chart')
-  var salesChart  = new Chart($salesChart, {
+  const $salesChart = $('#sales-chart')
+  const salesChart  = new Chart($salesChart, {
     type   : 'bar',
     data   : {
       labels  : ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
@@ -30,12 +28,12 @@ $(function () {
     options: {
       maintainAspectRatio: false,
       tooltips           : {
-        mode     : mode,
-        intersect: intersect
+        mode,
+        intersect
       },
       hover              : {
-        mode     : mode,
-        intersect: intersect
+        mode,
+        intersect
       },
       legend             : {
         display: false
@@ -53,12 +51,12 @@ $(function () {
             beginAtZero: true,
 
             // Include a dollar sign in the ticks
-            callback: function (value, index, values) {
+            callback(value, index, values) {
               if (value >= 1000) {
                 value /= 1000
                 value += 'k'
               }
-              return '$' + value
+              return `$${value}`
             }
           }, ticksStyle)
         }],
@@ -73,8 +71,8 @@ $(function () {
     }
   })
 
-  var $visitorsChart = $('#visitors-chart')
-  var visitorsChart  = new Chart($visitorsChart, {
+  const $visitorsChart = $('#visitors-chart')
+  const visitorsChart  = new Chart($visitorsChart, {
     data   : {
       labels  : ['18th', '20th', '22nd', '24th', '26th', '28th', '30th'],
       datasets: [{
@@ -88,27 +86,27 @@ $(function () {
         // pointHoverBackgroundColor: '#007bff',
         // pointHoverBorderColor    : '#007bff'
       },
-        {
-          type                : 'line',
-          data                : [60, 80, 70, 67, 80, 77, 100],
-          backgroundColor     : 'tansparent',
-          borderColor         : '#ced4da',
-          pointBorderColor    : '#ced4da',
-          pointBackgroundColor: '#ced4da',
-          fill                : false
-          // pointHoverBackgroundColor: '#ced4da',
-          // pointHoverBorderColor    : '#ced4da'
-        }]
+      {
+        type                : 'line',
+        data                : [60, 80, 70, 67, 80, 77, 100],
+        backgroundColor     : 'tansparent',
+        borderColor         : '#ced4da',
+        pointBorderColor    : '#ced4da',
+        pointBackgroundColor: '#ced4da',
+        fill                : false
+        // pointHoverBackgroundColor: '#ced4da',
+        // pointHoverBorderColor    : '#ced4da'
+      }]
     },
     options: {
       maintainAspectRatio: false,
       tooltips           : {
-        mode     : mode,
-        intersect: intersect
+        mode,
+        intersect
       },
       hover              : {
-        mode     : mode,
-        intersect: intersect
+        mode,
+        intersect
       },
       legend             : {
         display: false

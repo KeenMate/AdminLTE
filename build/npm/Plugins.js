@@ -393,7 +393,7 @@ const Plugins = [
   {
     from: 'node_modules/bs-custom-file-input/dist/',
     to  : 'plugins/bs-custom-file-input'
-  },
+  }
 ]
 
 module.exports = Plugins

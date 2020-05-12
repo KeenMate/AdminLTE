@@ -164,7 +164,7 @@
     "keyword-spacing": "error",
     "linebreak-style": [
       "error",
-      "unix"
+      "windows"
     ],
     "line-comment-position": "off",
     "lines-around-comment": "off",
@@ -208,7 +208,9 @@
     "no-new-object": "error",
     "no-plusplus": "off",
     "no-restricted-syntax": "error",
-    "no-tabs": "error",
+    "no-tabs": ["error", {
+      "allowIndentationTabs": true
+    }],
     "no-ternary": "off",
     "no-trailing-spaces": "error",
     "no-underscore-dangle": "off",
@@ -222,7 +224,7 @@
     ],
     "object-curly-spacing": [
       "error",
-      "always"
+      "never"
     ],
     "object-property-newline": "error",
     "one-var": [
@@ -243,7 +245,7 @@
     ],
     "quotes": [
       "error",
-      "single"
+      "double"
     ],
     "require-jsdoc": "off",
     "semi": [

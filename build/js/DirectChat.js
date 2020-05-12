@@ -18,17 +18,17 @@ const DirectChat = (($) => {
   const DATA_API_KEY       = '.data-api'
 
   const Event = {
-    TOGGLED: `toggled{EVENT_KEY}`
+    TOGGLED: 'toggled{EVENT_KEY}'
   }
 
   const Selector = {
     DATA_TOGGLE: '[data-widget="chat-pane-toggle"]',
     DIRECT_CHAT: '.direct-chat'
-  };
+  }
 
   const ClassName = {
     DIRECT_CHAT_OPEN: 'direct-chat-contacts-open'
-  };
+  }
 
   /**
    * Class Definition
@@ -41,7 +41,7 @@ const DirectChat = (($) => {
     }
 
     toggle() {
-      $(this._element).parents(Selector.DIRECT_CHAT).first().toggleClass(ClassName.DIRECT_CHAT_OPEN);
+      $(this._element).parents(Selector.DIRECT_CHAT).first().toggleClass(ClassName.DIRECT_CHAT_OPEN)
 
       const toggledEvent = $.Event(Event.TOGGLED)
       $(this._element).trigger(toggledEvent)
@@ -70,9 +70,11 @@ const DirectChat = (($) => {
    */
 
   $(document).on('click', Selector.DATA_TOGGLE, function (event) {
-    if (event) event.preventDefault();
-    DirectChat._jQueryInterface.call($(this), 'toggle');
-  });
+    if (event) {
+      event.preventDefault()
+    }
+    DirectChat._jQueryInterface.call($(this), 'toggle')
+  })
 
   /**
    * jQuery API

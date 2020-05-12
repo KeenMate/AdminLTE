@@ -49,14 +49,14 @@ const Layout = (($) => {
     LOGIN_PAGE     : 'login-page',
     REGISTER_PAGE  : 'register-page',
     CONTROL_SIDEBAR_SLIDE_OPEN: 'control-sidebar-slide-open',
-    CONTROL_SIDEBAR_OPEN: 'control-sidebar-open',
+    CONTROL_SIDEBAR_OPEN: 'control-sidebar-open'
   }
 
   const Default = {
     scrollbarTheme : 'os-theme-light',
     scrollbarAutoHide: 'l',
     panelAutoHeight: true,
-    loginRegisterAutoHeight: true,
+    loginRegisterAutoHeight: true
   }
 
   /**
@@ -86,32 +86,32 @@ const Layout = (($) => {
         header: $(Selector.HEADER).length !== 0 ? $(Selector.HEADER).outerHeight() : 0,
         footer: $(Selector.FOOTER).length !== 0 ? $(Selector.FOOTER).outerHeight() : 0,
         sidebar: $(Selector.SIDEBAR).length !== 0 ? $(Selector.SIDEBAR).height() : 0,
-        control_sidebar: control_sidebar,
+        control_sidebar
       }
 
       const max = this._max(heights)
       let offset = this._config.panelAutoHeight
 
       if (offset === true) {
-        offset = 0;
+        offset = 0
       }
 
       if (offset !== false) {
         if (max == heights.control_sidebar) {
-          $(Selector.CONTENT).css('min-height', (max + offset))
+          $(Selector.CONTENT).css('min-height', max + offset)
         } else if (max == heights.window) {
-          $(Selector.CONTENT).css('min-height', (max + offset) - heights.header - heights.footer)
+          $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer)
         } else {
-          $(Selector.CONTENT).css('min-height', (max + offset) - heights.header)
+          $(Selector.CONTENT).css('min-height', max + offset - heights.header)
         }
         if (this._isFooterFixed()) {
-          $(Selector.CONTENT).css('min-height', parseFloat($(Selector.CONTENT).css('min-height')) + heights.footer);
+          $(Selector.CONTENT).css('min-height', parseFloat($(Selector.CONTENT).css('min-height')) + heights.footer)
         }
       }
 
       if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
         if (offset !== false) {
-          $(Selector.CONTENT).css('min-height', (max + offset) - heights.header - heights.footer)
+          $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer)
         }
 
         if (typeof $.fn.overlayScrollbars !== 'undefined') {
@@ -119,7 +119,7 @@ const Layout = (($) => {
             className       : this._config.scrollbarTheme,
             sizeAutoCapable : true,
             scrollbars : {
-              autoHide: this._config.scrollbarAutoHide, 
+              autoHide: this._config.scrollbarAutoHide,
               clickScrolling : true
             }
           })
@@ -128,10 +128,10 @@ const Layout = (($) => {
     }
 
     fixLoginRegisterHeight() {
-      if ($(Selector.LOGIN_BOX + ', ' + Selector.REGISTER_BOX).length === 0) {
+      if ($(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).length === 0) {
         $('body, html').css('height', 'auto')
-      } else if ($(Selector.LOGIN_BOX + ', ' + Selector.REGISTER_BOX).length !== 0) {
-        let box_height = $(Selector.LOGIN_BOX + ', ' + Selector.REGISTER_BOX).height()
+      } else if ($(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).length !== 0) {
+        const box_height = $(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).height()
 
         if ($('body').css('min-height') !== box_height) {
           $('body').css('min-height', box_height)
@@ -148,7 +148,7 @@ const Layout = (($) => {
       if (this._config.loginRegisterAutoHeight === true) {
         this.fixLoginRegisterHeight()
       } else if (Number.isInteger(this._config.loginRegisterAutoHeight)) {
-        setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight);
+        setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight)
       }
 
       $(Selector.SIDEBAR)
@@ -175,8 +175,7 @@ const Layout = (($) => {
 
       setTimeout(() => {
         $('body.hold-transition').removeClass('hold-transition')
-
-      }, 50);
+      }, 50)
     }
 
     _max(numbers) {
@@ -193,7 +192,7 @@ const Layout = (($) => {
     }
 
     _isFooterFixed() {
-      return $('.main-footer').css('position') === 'fixed';
+      return $('.main-footer').css('position') === 'fixed'
     }
 
     // Static
@@ -209,7 +208,7 @@ const Layout = (($) => {
         }
 
         if (config === 'init' || config === '') {
-          data['_init']()
+          data._init()
         } else if (config === 'fixLayoutHeight' || config === 'fixLoginRegisterHeight') {
           data[config]()
         }
@@ -226,12 +225,12 @@ const Layout = (($) => {
     Layout._jQueryInterface.call($('body'))
   })
 
-  $(Selector.SIDEBAR + ' a').on('focusin', () => {
-    $(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED);
+  $(`${Selector.SIDEBAR} a`).on('focusin', () => {
+    $(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED)
   })
 
-  $(Selector.SIDEBAR + ' a').on('focusout', () => {
-    $(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED);
+  $(`${Selector.SIDEBAR} a`).on('focusout', () => {
+    $(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED)
   })
 
   /**

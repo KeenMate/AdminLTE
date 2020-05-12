@@ -12,7 +12,7 @@ class Publish {
 
   getArguments() {
     if (process.argv.length > 2) {
-      let arg = process.argv[2]
+      const arg = process.argv[2]
       switch (arg) {
         case '-v':
         case '--verbose':
@@ -40,4 +40,4 @@ class Publish {
   }
 }
 
-(new Publish()).run()
+new Publish().run()

@@ -1,4 +1,4 @@
-'use strict'
+
 
 module.exports = (ctx) => ({
   map: ctx.file.dirname.includes('examples') ? false : {

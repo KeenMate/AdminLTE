@@ -19,16 +19,16 @@ const CardRefresh = (($) => {
   const Event = {
     LOADED: `loaded${EVENT_KEY}`,
     OVERLAY_ADDED: `overlay.added${EVENT_KEY}`,
-    OVERLAY_REMOVED: `overlay.removed${EVENT_KEY}`,
+    OVERLAY_REMOVED: `overlay.removed${EVENT_KEY}`
   }
 
   const ClassName = {
-    CARD: 'card',
+    CARD: 'card'
   }
 
   const Selector = {
     CARD: `.${ClassName.CARD}`,
-    DATA_REFRESH: '[data-card-widget="card-refresh"]',
+    DATA_REFRESH: '[data-card-widget="card-refresh"]'
   }
 
   const Default = {
@@ -41,10 +41,10 @@ const CardRefresh = (($) => {
     loadOnInit: true,
     responseType: '',
     overlayTemplate: '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>',
-    onLoadStart: function () {
+    onLoadStart() {
     },
-    onLoadDone: function (response) {
-      return response;
+    onLoadDone(response) {
+      return response
     }
   }
 
@@ -60,7 +60,7 @@ const CardRefresh = (($) => {
       }
 
       if (this._settings.source === '') {
-        throw new Error('Source url was not defined. Please specify a url in your CardRefresh source option.');
+        throw new Error('Source url was not defined. Please specify a url in your CardRefresh source option.')
       }
     }
 
@@ -68,7 +68,7 @@ const CardRefresh = (($) => {
       this._addOverlay()
       this._settings.onLoadStart.call($(this))
 
-      $.get(this._settings.source, this._settings.params, function (response) {
+      $.get(this._settings.source, this._settings.params, (response) => {
         if (this._settings.loadInContent) {
           if (this._settings.sourceSelector != '') {
             response = $(response).find(this._settings.sourceSelector).html()
@@ -78,8 +78,8 @@ const CardRefresh = (($) => {
         }
 
         this._settings.onLoadDone.call($(this), response)
-        this._removeOverlay();
-      }.bind(this), this._settings.responseType !== '' && this._settings.responseType)
+        this._removeOverlay()
+      }, this._settings.responseType !== '' && this._settings.responseType)
 
       const loadedEvent = $.Event(Event.LOADED)
       $(this._element).trigger(loadedEvent)
@@ -90,14 +90,14 @@ const CardRefresh = (($) => {
 
       const overlayAddedEvent = $.Event(Event.OVERLAY_ADDED)
       $(this._element).trigger(overlayAddedEvent)
-    };
+    }
 
     _removeOverlay() {
       this._parent.find(this._overlay).remove()
 
       const overlayRemovedEvent = $.Event(Event.OVERLAY_REMOVED)
       $(this._element).trigger(overlayRemovedEvent)
-    };
+    }
 
 
     // Private
@@ -120,7 +120,7 @@ const CardRefresh = (($) => {
 
       if (!data) {
         data = new CardRefresh($(this), _options)
-        $(this).data(DATA_KEY, typeof config === 'string' ? data: config)
+        $(this).data(DATA_KEY, typeof config === 'string' ? data : config)
       }
 
       if (typeof config === 'string' && config.match(/load/)) {
@@ -144,8 +144,8 @@ const CardRefresh = (($) => {
     CardRefresh._jQueryInterface.call($(this), 'load')
   })
 
-  $(document).ready(function () {
-    $(Selector.DATA_REFRESH).each(function() {
+  $(document).ready(() => {
+    $(Selector.DATA_REFRESH).each(function () {
       CardRefresh._jQueryInterface.call($(this))
     })
   })

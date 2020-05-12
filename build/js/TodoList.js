@@ -25,11 +25,11 @@ const TodoList = (($) => {
   }
 
   const Default = {
-    onCheck: function (item) {
-      return item;
+    onCheck(item) {
+      return item
     },
-    onUnCheck: function (item) {
-      return item;
+    onUnCheck(item) {
+      return item
     }
   }
 
@@ -49,27 +49,27 @@ const TodoList = (($) => {
     // Public
 
     toggle(item) {
-      item.parents('li').toggleClass(ClassName.TODO_LIST_DONE);
-      if (! $(item).prop('checked')) {
-        this.unCheck($(item));
-        return;
+      item.parents('li').toggleClass(ClassName.TODO_LIST_DONE)
+      if (!$(item).prop('checked')) {
+        this.unCheck($(item))
+        return
       }
 
-      this.check(item);
+      this.check(item)
     }
 
-    check (item) {
-      this._config.onCheck.call(item);
+    check(item) {
+      this._config.onCheck.call(item)
     }
 
-    unCheck (item) {
-      this._config.onUnCheck.call(item);
+    unCheck(item) {
+      this._config.onUnCheck.call(item)
     }
 
     // Private
 
     _init() {
-      var that = this
+      const that = this
       $(Selector.DATA_TOGGLE).find('input:checkbox:checked').parents('li').toggleClass(ClassName.TODO_LIST_DONE)
       $(Selector.DATA_TOGGLE).on('change', 'input:checkbox', (event) => {
         that.toggle($(event.target))
