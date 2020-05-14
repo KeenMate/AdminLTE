@@ -105,7 +105,8 @@ textarea {
   padding: 0.35rem 0.5rem;
 }
 
-.card-body {
+.card-body,
+.card-footer {
   padding: .5rem
 }
 

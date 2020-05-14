@@ -1,1 +1,13 @@
 !/docs/
+/node_modules/
+/.github/
+/pages/
+
+/.git
+Dockerfile
+.travis.yml
+composer.json
+.drone.yml
+package-lock.json
+index*.html
+starter.html
