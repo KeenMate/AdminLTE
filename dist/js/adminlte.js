@@ -1,41 +1,44 @@
-/* !
+/*!
  * AdminLTE v3.0.4 (https://adminlte.io)
  * Copyright 2014-2020 Colorlib <http://colorlib.com>
  * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
  */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports)
-    : typeof define === 'function' && define.amd ? define(['exports'], factory)
-      : (global = global || self, factory(global.adminlte = {}))
-}(this, (exports) => {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'jquery'], factory) :
+  (global = global || self, factory(global.adminlte = {}, global.jQuery));
+}(this, (function (exports, $) { 'use strict';
+
+  $ = $ && Object.prototype.hasOwnProperty.call($, 'default') ? $['default'] : $;
+
   /**
    * --------------------------------------------
    * AdminLTE ControlSidebar.js
    * License MIT
    * --------------------------------------------
    */
-  const ControlSidebar = (function ($) {
+  var ControlSidebar = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'ControlSidebar'
-    const DATA_KEY = 'lte.controlsidebar'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      COLLAPSED: `collapsed${EVENT_KEY}`,
-      EXPANDED: `expanded${EVENT_KEY}`
-    }
-    const Selector = {
+    var NAME = 'ControlSidebar';
+    var DATA_KEY = 'lte.controlsidebar';
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      COLLAPSED: "collapsed" + EVENT_KEY,
+      EXPANDED: "expanded" + EVENT_KEY
+    };
+    var Selector = {
       CONTROL_SIDEBAR: '.control-sidebar',
       CONTROL_SIDEBAR_CONTENT: '.control-sidebar-content',
       DATA_TOGGLE: '[data-widget="control-sidebar"]',
       CONTENT: '.content-wrapper',
       HEADER: '.main-header',
       FOOTER: '.main-footer'
-    }
-    const ClassName = {
+    };
+    var ClassName = {
       CONTROL_SIDEBAR_ANIMATE: 'control-sidebar-animate',
       CONTROL_SIDEBAR_OPEN: 'control-sidebar-open',
       CONTROL_SIDEBAR_SLIDE: 'control-sidebar-slide-open',
@@ -50,203 +53,203 @@
       FOOTER_MD_FIXED: 'layout-md-footer-fixed',
       FOOTER_LG_FIXED: 'layout-lg-footer-fixed',
       FOOTER_XL_FIXED: 'layout-xl-footer-fixed'
-    }
-    const Default = {
+    };
+    var Default = {
       controlsidebarSlide: true,
       scrollbarTheme: 'os-theme-light',
       scrollbarAutoHide: 'l'
-    }
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const ControlSidebar = /* #__PURE__*/(function () {
+    var ControlSidebar = /*#__PURE__*/function () {
       function ControlSidebar(element, config) {
-        this._element = element
-        this._config = config
+        this._element = element;
+        this._config = config;
 
-        this._init()
+        this._init();
       } // Public
 
 
-      const _proto = ControlSidebar.prototype
+      var _proto = ControlSidebar.prototype;
 
       _proto.collapse = function collapse() {
         // Show the control sidebar
         if (this._config.controlsidebarSlide) {
-          $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
+          $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
           $('body').removeClass(ClassName.CONTROL_SIDEBAR_SLIDE).delay(300).queue(function () {
-            $(Selector.CONTROL_SIDEBAR).hide()
-            $('html').removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
-            $(this).dequeue()
-          })
+            $(Selector.CONTROL_SIDEBAR).hide();
+            $('html').removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
+            $(this).dequeue();
+          });
         } else {
-          $('body').removeClass(ClassName.CONTROL_SIDEBAR_OPEN)
+          $('body').removeClass(ClassName.CONTROL_SIDEBAR_OPEN);
         }
 
-        const collapsedEvent = $.Event(Event.COLLAPSED)
-        $(this._element).trigger(collapsedEvent)
-      }
+        var collapsedEvent = $.Event(Event.COLLAPSED);
+        $(this._element).trigger(collapsedEvent);
+      };
 
       _proto.show = function show() {
         // Collapse the control sidebar
         if (this._config.controlsidebarSlide) {
-          $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
+          $('html').addClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
           $(Selector.CONTROL_SIDEBAR).show().delay(10).queue(function () {
             $('body').addClass(ClassName.CONTROL_SIDEBAR_SLIDE).delay(300).queue(function () {
-              $('html').removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE)
-              $(this).dequeue()
-            })
-            $(this).dequeue()
-          })
+              $('html').removeClass(ClassName.CONTROL_SIDEBAR_ANIMATE);
+              $(this).dequeue();
+            });
+            $(this).dequeue();
+          });
         } else {
-          $('body').addClass(ClassName.CONTROL_SIDEBAR_OPEN)
+          $('body').addClass(ClassName.CONTROL_SIDEBAR_OPEN);
         }
 
-        const expandedEvent = $.Event(Event.EXPANDED)
-        $(this._element).trigger(expandedEvent)
-      }
+        var expandedEvent = $.Event(Event.EXPANDED);
+        $(this._element).trigger(expandedEvent);
+      };
 
       _proto.toggle = function toggle() {
-        const shouldClose = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE)
+        var shouldClose = $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE);
 
         if (shouldClose) {
           // Close the control sidebar
-          this.collapse()
+          this.collapse();
         } else {
           // Open the control sidebar
-          this.show()
+          this.show();
         }
       } // Private
-
+      ;
 
       _proto._init = function _init() {
-        const _this = this
+        var _this = this;
 
-        this._fixHeight()
+        this._fixHeight();
 
-        this._fixScrollHeight()
+        this._fixScrollHeight();
 
-        $(window).resize(() => {
-          _this._fixHeight()
+        $(window).resize(function () {
+          _this._fixHeight();
 
-          _this._fixScrollHeight()
-        })
-        $(window).scroll(() => {
+          _this._fixScrollHeight();
+        });
+        $(window).scroll(function () {
           if ($('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE)) {
-            _this._fixScrollHeight()
+            _this._fixScrollHeight();
           }
-        })
-      }
+        });
+      };
 
       _proto._fixScrollHeight = function _fixScrollHeight() {
-        const heights = {
+        var heights = {
           scroll: $(document).height(),
           window: $(window).height(),
           header: $(Selector.HEADER).outerHeight(),
           footer: $(Selector.FOOTER).outerHeight()
-        }
-        const positions = {
+        };
+        var positions = {
           bottom: Math.abs(heights.window + $(window).scrollTop() - heights.scroll),
           top: $(window).scrollTop()
-        }
-        let navbarFixed = false
-        let footerFixed = false
+        };
+        var navbarFixed = false;
+        var footerFixed = false;
 
         if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
           if ($('body').hasClass(ClassName.NAVBAR_FIXED) || $('body').hasClass(ClassName.NAVBAR_SM_FIXED) || $('body').hasClass(ClassName.NAVBAR_MD_FIXED) || $('body').hasClass(ClassName.NAVBAR_LG_FIXED) || $('body').hasClass(ClassName.NAVBAR_XL_FIXED)) {
             if ($(Selector.HEADER).css('position') === 'fixed') {
-              navbarFixed = true
+              navbarFixed = true;
             }
           }
 
           if ($('body').hasClass(ClassName.FOOTER_FIXED) || $('body').hasClass(ClassName.FOOTER_SM_FIXED) || $('body').hasClass(ClassName.FOOTER_MD_FIXED) || $('body').hasClass(ClassName.FOOTER_LG_FIXED) || $('body').hasClass(ClassName.FOOTER_XL_FIXED)) {
             if ($(Selector.FOOTER).css('position') === 'fixed') {
-              footerFixed = true
+              footerFixed = true;
             }
           }
 
           if (positions.top === 0 && positions.bottom === 0) {
-            $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer)
-            $(Selector.CONTROL_SIDEBAR).css('top', heights.header)
-            $(`${Selector.CONTROL_SIDEBAR}, ${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).css('height', heights.window - (heights.header + heights.footer))
+            $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer);
+            $(Selector.CONTROL_SIDEBAR).css('top', heights.header);
+            $(Selector.CONTROL_SIDEBAR + ", " + Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).css('height', heights.window - (heights.header + heights.footer));
           } else if (positions.bottom <= heights.footer) {
             if (footerFixed === false) {
-              $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer - positions.bottom)
-              $(`${Selector.CONTROL_SIDEBAR}, ${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).css('height', heights.window - (heights.footer - positions.bottom))
+              $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer - positions.bottom);
+              $(Selector.CONTROL_SIDEBAR + ", " + Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).css('height', heights.window - (heights.footer - positions.bottom));
             } else {
-              $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer)
+              $(Selector.CONTROL_SIDEBAR).css('bottom', heights.footer);
             }
           } else if (positions.top <= heights.header) {
             if (navbarFixed === false) {
-              $(Selector.CONTROL_SIDEBAR).css('top', heights.header - positions.top)
-              $(`${Selector.CONTROL_SIDEBAR}, ${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).css('height', heights.window - (heights.header - positions.top))
+              $(Selector.CONTROL_SIDEBAR).css('top', heights.header - positions.top);
+              $(Selector.CONTROL_SIDEBAR + ", " + Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).css('height', heights.window - (heights.header - positions.top));
             } else {
-              $(Selector.CONTROL_SIDEBAR).css('top', heights.header)
+              $(Selector.CONTROL_SIDEBAR).css('top', heights.header);
             }
           } else if (navbarFixed === false) {
-            $(Selector.CONTROL_SIDEBAR).css('top', 0)
-            $(`${Selector.CONTROL_SIDEBAR}, ${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).css('height', heights.window)
+            $(Selector.CONTROL_SIDEBAR).css('top', 0);
+            $(Selector.CONTROL_SIDEBAR + ", " + Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).css('height', heights.window);
           } else {
-            $(Selector.CONTROL_SIDEBAR).css('top', heights.header)
+            $(Selector.CONTROL_SIDEBAR).css('top', heights.header);
           }
         }
-      }
+      };
 
       _proto._fixHeight = function _fixHeight() {
-        const heights = {
+        var heights = {
           window: $(window).height(),
           header: $(Selector.HEADER).outerHeight(),
           footer: $(Selector.FOOTER).outerHeight()
-        }
+        };
 
         if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
-          let sidebarHeight = heights.window - heights.header
+          var sidebarHeight = heights.window - heights.header;
 
           if ($('body').hasClass(ClassName.FOOTER_FIXED) || $('body').hasClass(ClassName.FOOTER_SM_FIXED) || $('body').hasClass(ClassName.FOOTER_MD_FIXED) || $('body').hasClass(ClassName.FOOTER_LG_FIXED) || $('body').hasClass(ClassName.FOOTER_XL_FIXED)) {
             if ($(Selector.FOOTER).css('position') === 'fixed') {
-              sidebarHeight = heights.window - heights.header - heights.footer
+              sidebarHeight = heights.window - heights.header - heights.footer;
             }
           }
 
-          $(`${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).css('height', sidebarHeight)
+          $(Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).css('height', sidebarHeight);
 
           if (typeof $.fn.overlayScrollbars !== 'undefined') {
-            $(`${Selector.CONTROL_SIDEBAR} ${Selector.CONTROL_SIDEBAR_CONTENT}`).overlayScrollbars({
+            $(Selector.CONTROL_SIDEBAR + " " + Selector.CONTROL_SIDEBAR_CONTENT).overlayScrollbars({
               className: this._config.scrollbarTheme,
               sizeAutoCapable: true,
               scrollbars: {
                 autoHide: this._config.scrollbarAutoHide,
                 clickScrolling: true
               }
-            })
+            });
           }
         }
       } // Static
-
+      ;
 
       ControlSidebar._jQueryInterface = function _jQueryInterface(operation) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _options = $.extend({}, Default, $(this).data())
+          var _options = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new ControlSidebar(this, _options)
-            $(this).data(DATA_KEY, data)
+            data = new ControlSidebar(this, _options);
+            $(this).data(DATA_KEY, data);
           }
 
           if (data[operation] === 'undefined') {
-            throw new Error(`${operation} is not a function`)
+            throw new Error(operation + " is not a function");
           }
 
-          data[operation]()
-        })
-      }
+          data[operation]();
+        });
+      };
 
-      return ControlSidebar
-    }())
+      return ControlSidebar;
+    }();
     /**
      *
      * Data Api implementation
@@ -255,25 +258,25 @@
 
 
     $(document).on('click', Selector.DATA_TOGGLE, function (event) {
-      event.preventDefault()
+      event.preventDefault();
 
-      ControlSidebar._jQueryInterface.call($(this), 'toggle')
-    })
+      ControlSidebar._jQueryInterface.call($(this), 'toggle');
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = ControlSidebar._jQueryInterface
-    $.fn[NAME].Constructor = ControlSidebar
+    $.fn[NAME] = ControlSidebar._jQueryInterface;
+    $.fn[NAME].Constructor = ControlSidebar;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return ControlSidebar._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return ControlSidebar._jQueryInterface;
+    };
 
-    return ControlSidebar
-  }(jQuery))
+    return ControlSidebar;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -281,15 +284,15 @@
    * License MIT
    * --------------------------------------------
    */
-  const Layout = (function ($) {
+  var Layout = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'Layout'
-    const DATA_KEY = 'lte.layout'
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Selector = {
+    var NAME = 'Layout';
+    var DATA_KEY = 'lte.layout';
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Selector = {
       HEADER: '.main-header',
       MAIN_SIDEBAR: '.main-sidebar',
       SIDEBAR: '.main-sidebar .sidebar',
@@ -305,8 +308,8 @@
       PUSHMENU_BTN: '[data-widget="pushmenu"]',
       LOGIN_BOX: '.login-box',
       REGISTER_BOX: '.register-box'
-    }
-    const ClassName = {
+    };
+    var ClassName = {
       HOLD: 'hold-transition',
       SIDEBAR: 'main-sidebar',
       CONTENT_FIXED: 'content-fixed',
@@ -318,73 +321,73 @@
       REGISTER_PAGE: 'register-page',
       CONTROL_SIDEBAR_SLIDE_OPEN: 'control-sidebar-slide-open',
       CONTROL_SIDEBAR_OPEN: 'control-sidebar-open'
-    }
-    const Default = {
+    };
+    var Default = {
       scrollbarTheme: 'os-theme-light',
       scrollbarAutoHide: 'l',
       panelAutoHeight: true,
       loginRegisterAutoHeight: true
-    }
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const Layout = /* #__PURE__*/(function () {
+    var Layout = /*#__PURE__*/function () {
       function Layout(element, config) {
-        this._config = config
-        this._element = element
+        this._config = config;
+        this._element = element;
 
-        this._init()
+        this._init();
       } // Public
 
 
-      const _proto = Layout.prototype
+      var _proto = Layout.prototype;
 
       _proto.fixLayoutHeight = function fixLayoutHeight(extra) {
         if (extra === void 0) {
-          extra = null
+          extra = null;
         }
 
-        let control_sidebar = 0
+        var control_sidebar = 0;
 
         if ($('body').hasClass(ClassName.CONTROL_SIDEBAR_SLIDE_OPEN) || $('body').hasClass(ClassName.CONTROL_SIDEBAR_OPEN) || extra == 'control_sidebar') {
-          control_sidebar = $(Selector.CONTROL_SIDEBAR_CONTENT).height()
+          control_sidebar = $(Selector.CONTROL_SIDEBAR_CONTENT).height();
         }
 
-        const heights = {
+        var heights = {
           window: $(window).height(),
           header: $(Selector.HEADER).length !== 0 ? $(Selector.HEADER).outerHeight() : 0,
           footer: $(Selector.FOOTER).length !== 0 ? $(Selector.FOOTER).outerHeight() : 0,
           sidebar: $(Selector.SIDEBAR).length !== 0 ? $(Selector.SIDEBAR).height() : 0,
-          control_sidebar
-        }
+          control_sidebar: control_sidebar
+        };
 
-        const max = this._max(heights)
+        var max = this._max(heights);
 
-        let offset = this._config.panelAutoHeight
+        var offset = this._config.panelAutoHeight;
 
         if (offset === true) {
-          offset = 0
+          offset = 0;
         }
 
         if (offset !== false) {
           if (max == heights.control_sidebar) {
-            $(Selector.CONTENT).css('min-height', max + offset)
+            $(Selector.CONTENT).css('min-height', max + offset);
           } else if (max == heights.window) {
-            $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer)
+            $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer);
           } else {
-            $(Selector.CONTENT).css('min-height', max + offset - heights.header)
+            $(Selector.CONTENT).css('min-height', max + offset - heights.header);
           }
 
           if (this._isFooterFixed()) {
-            $(Selector.CONTENT).css('min-height', parseFloat($(Selector.CONTENT).css('min-height')) + heights.footer)
+            $(Selector.CONTENT).css('min-height', parseFloat($(Selector.CONTENT).css('min-height')) + heights.footer);
           }
         }
 
         if ($('body').hasClass(ClassName.LAYOUT_FIXED)) {
           if (offset !== false) {
-            $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer)
+            $(Selector.CONTENT).css('min-height', max + offset - heights.header - heights.footer);
           }
 
           if (typeof $.fn.overlayScrollbars !== 'undefined') {
@@ -395,126 +398,126 @@
                 autoHide: this._config.scrollbarAutoHide,
                 clickScrolling: true
               }
-            })
+            });
           }
         }
-      }
+      };
 
       _proto.fixLoginRegisterHeight = function fixLoginRegisterHeight() {
-        if ($(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).length === 0) {
-          $('body, html').css('height', 'auto')
-        } else if ($(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).length !== 0) {
-          const box_height = $(`${Selector.LOGIN_BOX}, ${Selector.REGISTER_BOX}`).height()
+        if ($(Selector.LOGIN_BOX + ", " + Selector.REGISTER_BOX).length === 0) {
+          $('body, html').css('height', 'auto');
+        } else if ($(Selector.LOGIN_BOX + ", " + Selector.REGISTER_BOX).length !== 0) {
+          var box_height = $(Selector.LOGIN_BOX + ", " + Selector.REGISTER_BOX).height();
 
           if ($('body').css('min-height') !== box_height) {
-            $('body').css('min-height', box_height)
+            $('body').css('min-height', box_height);
           }
         }
       } // Private
-
+      ;
 
       _proto._init = function _init() {
-        const _this = this
+        var _this = this;
 
         // Activate layout height watcher
-        this.fixLayoutHeight()
+        this.fixLayoutHeight();
 
         if (this._config.loginRegisterAutoHeight === true) {
-          this.fixLoginRegisterHeight()
+          this.fixLoginRegisterHeight();
         } else if (Number.isInteger(this._config.loginRegisterAutoHeight)) {
-          setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight)
+          setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight);
         }
 
-        $(Selector.SIDEBAR).on('collapsed.lte.treeview expanded.lte.treeview', () => {
-          _this.fixLayoutHeight()
-        })
-        $(Selector.PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', () => {
-          _this.fixLayoutHeight()
-        })
-        $(Selector.CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', () => {
-          _this.fixLayoutHeight()
-        }).on('expanded.lte.controlsidebar', () => {
-          _this.fixLayoutHeight('control_sidebar')
-        })
-        $(window).resize(() => {
-          _this.fixLayoutHeight()
-        })
-        setTimeout(() => {
-          $('body.hold-transition').removeClass('hold-transition')
-        }, 50)
-      }
+        $(Selector.SIDEBAR).on('collapsed.lte.treeview expanded.lte.treeview', function () {
+          _this.fixLayoutHeight();
+        });
+        $(Selector.PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', function () {
+          _this.fixLayoutHeight();
+        });
+        $(Selector.CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', function () {
+          _this.fixLayoutHeight();
+        }).on('expanded.lte.controlsidebar', function () {
+          _this.fixLayoutHeight('control_sidebar');
+        });
+        $(window).resize(function () {
+          _this.fixLayoutHeight();
+        });
+        setTimeout(function () {
+          $('body.hold-transition').removeClass('hold-transition');
+        }, 50);
+      };
 
       _proto._max = function _max(numbers) {
         // Calculate the maximum number in a list
-        let max = 0
-        Object.keys(numbers).forEach((key) => {
+        var max = 0;
+        Object.keys(numbers).forEach(function (key) {
           if (numbers[key] > max) {
-            max = numbers[key]
+            max = numbers[key];
           }
-        })
-        return max
-      }
+        });
+        return max;
+      };
 
       _proto._isFooterFixed = function _isFooterFixed() {
-        return $('.main-footer').css('position') === 'fixed'
+        return $('.main-footer').css('position') === 'fixed';
       } // Static
-
+      ;
 
       Layout._jQueryInterface = function _jQueryInterface(config) {
         if (config === void 0) {
-          config = ''
+          config = '';
         }
 
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _options = $.extend({}, Default, $(this).data())
+          var _options = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new Layout($(this), _options)
-            $(this).data(DATA_KEY, data)
+            data = new Layout($(this), _options);
+            $(this).data(DATA_KEY, data);
           }
 
           if (config === 'init' || config === '') {
-            data._init()
+            data._init();
           } else if (config === 'fixLayoutHeight' || config === 'fixLoginRegisterHeight') {
-            data[config]()
+            data[config]();
           }
-        })
-      }
+        });
+      };
 
-      return Layout
-    }())
+      return Layout;
+    }();
     /**
      * Data API
      * ====================================================
      */
 
 
-    $(window).on('load', () => {
-      Layout._jQueryInterface.call($('body'))
-    })
-    $(`${Selector.SIDEBAR} a`).on('focusin', () => {
-      $(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED)
-    })
-    $(`${Selector.SIDEBAR} a`).on('focusout', () => {
-      $(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED)
-    })
+    $(window).on('load', function () {
+      Layout._jQueryInterface.call($('body'));
+    });
+    $(Selector.SIDEBAR + " a").on('focusin', function () {
+      $(Selector.MAIN_SIDEBAR).addClass(ClassName.SIDEBAR_FOCUSED);
+    });
+    $(Selector.SIDEBAR + " a").on('focusout', function () {
+      $(Selector.MAIN_SIDEBAR).removeClass(ClassName.SIDEBAR_FOCUSED);
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = Layout._jQueryInterface
-    $.fn[NAME].Constructor = Layout
+    $.fn[NAME] = Layout._jQueryInterface;
+    $.fn[NAME].Constructor = Layout;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return Layout._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Layout._jQueryInterface;
+    };
 
-    return Layout
-  }(jQuery))
+    return Layout;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -522,220 +525,221 @@
    * License MIT
    * --------------------------------------------
    */
-  const PushMenu = (function ($) {
+
+  var PushMenu = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'PushMenu'
-    const DATA_KEY = 'lte.pushmenu'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      COLLAPSED: `collapsed${EVENT_KEY}`,
-      SHOWN: `shown${EVENT_KEY}`
-    }
-    const Default = {
+    var NAME = "PushMenu";
+    var DATA_KEY = "lte.pushmenu";
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      COLLAPSED: "collapsed" + EVENT_KEY,
+      SHOWN: "shown" + EVENT_KEY
+    };
+    var Default = {
       autoCollapseSize: 992,
       enableRemember: false,
       noTransitionAfterReload: true
-    }
-    const Selector = {
-      TOGGLE_BUTTON: '[data-widget="pushmenu"]',
-      SIDEBAR_MINI: '.sidebar-mini',
-      SIDEBAR_COLLAPSED: '.sidebar-collapse',
-      BODY: 'body',
-      OVERLAY: '#sidebar-overlay',
-      WRAPPER: '.wrapper'
-    }
-    const ClassName = {
-      COLLAPSED: 'sidebar-collapse',
-      OPEN: 'sidebar-open',
-      CLOSED: 'sidebar-closed'
-    }
+    };
+    var Selector = {
+      TOGGLE_BUTTON: "[data-widget=\"pushmenu\"]",
+      SIDEBAR_MINI: ".sidebar-mini",
+      SIDEBAR_COLLAPSED: ".sidebar-collapse",
+      BODY: "body",
+      OVERLAY: "#sidebar-overlay",
+      WRAPPER: ".wrapper"
+    };
+    var ClassName = {
+      COLLAPSED: "sidebar-collapse",
+      OPEN: "sidebar-open",
+      CLOSED: "sidebar-closed"
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const PushMenu = /* #__PURE__*/(function () {
+    var PushMenu = /*#__PURE__*/function () {
       function PushMenu(element, options) {
-        this._element = element
-        this._options = $.extend({}, Default, options)
+        this._element = element;
+        this._options = $.extend({}, Default, options);
 
         if (!$(Selector.OVERLAY).length) {
-          this._addOverlay()
+          this._addOverlay();
         }
 
-        this._init()
+        this._init();
       } // Public
 
 
-      const _proto = PushMenu.prototype
+      var _proto = PushMenu.prototype;
 
       _proto.expand = function expand() {
         if (this._options.autoCollapseSize) {
           if ($(window).width() <= this._options.autoCollapseSize) {
-            $(Selector.BODY).addClass(ClassName.OPEN)
+            $(Selector.BODY).addClass(ClassName.OPEN);
           }
         }
 
-        $(Selector.BODY).removeClass(ClassName.COLLAPSED).removeClass(ClassName.CLOSED)
+        $(Selector.BODY).removeClass(ClassName.COLLAPSED).removeClass(ClassName.CLOSED);
 
         if (this._options.enableRemember) {
-          localStorage.setItem(`remember${EVENT_KEY}`, ClassName.OPEN)
+          localStorage.setItem("remember" + EVENT_KEY, ClassName.OPEN);
         }
 
-        const shownEvent = $.Event(Event.SHOWN)
-        $(this._element).trigger(shownEvent)
-      }
+        var shownEvent = $.Event(Event.SHOWN);
+        $(this._element).trigger(shownEvent);
+      };
 
       _proto.collapse = function collapse() {
         if (this._options.autoCollapseSize) {
           if ($(window).width() <= this._options.autoCollapseSize) {
-            $(Selector.BODY).removeClass(ClassName.OPEN).addClass(ClassName.CLOSED)
+            $(Selector.BODY).removeClass(ClassName.OPEN).addClass(ClassName.CLOSED);
           }
         }
 
-        $(Selector.BODY).addClass(ClassName.COLLAPSED)
+        $(Selector.BODY).addClass(ClassName.COLLAPSED);
 
         if (this._options.enableRemember) {
-          localStorage.setItem(`remember${EVENT_KEY}`, ClassName.COLLAPSED)
+          localStorage.setItem("remember" + EVENT_KEY, ClassName.COLLAPSED);
         }
 
-        const collapsedEvent = $.Event(Event.COLLAPSED)
-        $(this._element).trigger(collapsedEvent)
-      }
+        var collapsedEvent = $.Event(Event.COLLAPSED);
+        $(this._element).trigger(collapsedEvent);
+      };
 
       _proto.toggle = function toggle() {
         if (!$(Selector.BODY).hasClass(ClassName.COLLAPSED)) {
-          this.collapse()
+          this.collapse();
         } else {
-          this.expand()
+          this.expand();
         }
-      }
+      };
 
       _proto.autoCollapse = function autoCollapse(resize) {
         if (resize === void 0) {
-          resize = false
+          resize = false;
         }
 
         if (this._options.autoCollapseSize) {
           if ($(window).width() <= this._options.autoCollapseSize) {
             if (!$(Selector.BODY).hasClass(ClassName.OPEN)) {
-              this.collapse()
+              this.collapse();
             }
           } else if (resize == true) {
             if ($(Selector.BODY).hasClass(ClassName.OPEN)) {
-              $(Selector.BODY).removeClass(ClassName.OPEN)
+              $(Selector.BODY).removeClass(ClassName.OPEN);
             } else if ($(Selector.BODY).hasClass(ClassName.CLOSED)) {
-              this.expand()
+              this.expand();
             }
           }
         }
-      }
+      };
 
       _proto.remember = function remember() {
         if (this._options.enableRemember) {
-          const toggleState = localStorage.getItem(`remember${EVENT_KEY}`)
+          var toggleState = localStorage.getItem("remember" + EVENT_KEY);
 
           if (toggleState == ClassName.COLLAPSED) {
             if (this._options.noTransitionAfterReload) {
-              $('body').addClass('hold-transition').addClass(ClassName.COLLAPSED).delay(50).queue(function () {
-                $(this).removeClass('hold-transition')
-                $(this).dequeue()
-              })
+              $("body").addClass("hold-transition").addClass(ClassName.COLLAPSED).delay(50).queue(function () {
+                $(this).removeClass("hold-transition");
+                $(this).dequeue();
+              });
             } else {
-              $('body').addClass(ClassName.COLLAPSED)
+              $("body").addClass(ClassName.COLLAPSED);
             }
           } else if (this._options.noTransitionAfterReload) {
-            $('body').addClass('hold-transition').removeClass(ClassName.COLLAPSED).delay(50).queue(function () {
-              $(this).removeClass('hold-transition')
-              $(this).dequeue()
-            })
+            $("body").addClass("hold-transition").removeClass(ClassName.COLLAPSED).delay(50).queue(function () {
+              $(this).removeClass("hold-transition");
+              $(this).dequeue();
+            });
           } else {
-            $('body').removeClass(ClassName.COLLAPSED)
+            $("body").removeClass(ClassName.COLLAPSED);
           }
         }
       } // Private
-
+      ;
 
       _proto._init = function _init() {
-        const _this = this
+        var _this = this;
 
-        this.remember()
-        this.autoCollapse()
-        $(window).resize(() => {
-          _this.autoCollapse(true)
-        })
-      }
+        this.remember();
+        this.autoCollapse();
+        $(window).resize(function () {
+          _this.autoCollapse(true);
+        });
+      };
 
       _proto._addOverlay = function _addOverlay() {
-        const _this2 = this
+        var _this2 = this;
 
-        const overlay = $('<div />', {
-          id: 'sidebar-overlay'
-        })
-        overlay.on('click', () => {
-          _this2.collapse()
-        })
-        $(Selector.WRAPPER).append(overlay)
+        var overlay = $("<div />", {
+          id: "sidebar-overlay"
+        });
+        overlay.on("click", function () {
+          _this2.collapse();
+        });
+        $(Selector.WRAPPER).append(overlay);
       } // Static
-
+      ;
 
       PushMenu._jQueryInterface = function _jQueryInterface(operation) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _options = $.extend({}, Default, $(this).data())
+          var _options = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new PushMenu(this, _options)
-            $(this).data(DATA_KEY, data)
+            data = new PushMenu(this, _options);
+            $(this).data(DATA_KEY, data);
           }
 
-          if (typeof operation === 'string' && operation.match(/collapse|expand|toggle/)) {
-            data[operation]()
+          if (typeof operation === "string" && operation.match(/collapse|expand|toggle/)) {
+            data[operation]();
           }
-        })
-      }
+        });
+      };
 
-      return PushMenu
-    }())
+      return PushMenu;
+    }();
     /**
      * Data API
      * ====================================================
      */
 
 
-    $(document).on('click', Selector.TOGGLE_BUTTON, (event) => {
-      event.preventDefault()
-      let button = event.currentTarget
+    $(document).on("click", Selector.TOGGLE_BUTTON, function (event) {
+      event.preventDefault();
+      var button = event.currentTarget;
 
-      if ($(button).data('widget') !== 'pushmenu') {
-        button = $(button).closest(Selector.TOGGLE_BUTTON)
+      if ($(button).data("widget") !== "pushmenu") {
+        button = $(button).closest(Selector.TOGGLE_BUTTON);
       }
 
-      PushMenu._jQueryInterface.call($(button), 'toggle')
-    })
-    $(window).on('load', () => {
-      PushMenu._jQueryInterface.call($(Selector.TOGGLE_BUTTON))
-    })
+      PushMenu._jQueryInterface.call($(button), "toggle");
+    });
+    $(window).on("load", function () {
+      PushMenu._jQueryInterface.call($(Selector.TOGGLE_BUTTON));
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = PushMenu._jQueryInterface
-    $.fn[NAME].Constructor = PushMenu
+    $.fn[NAME] = PushMenu._jQueryInterface;
+    $.fn[NAME].Constructor = PushMenu;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return PushMenu._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return PushMenu._jQueryInterface;
+    };
 
-    return PushMenu
-  }(jQuery))
+    return PushMenu;
+  }($);
 
   /**
    * --------------------------------------------
@@ -743,180 +747,163 @@
    * License MIT
    * --------------------------------------------
    */
-  const Treeview = (function ($) {
+  var Treeview = function ($) {
     /**
-     * Constants
-     * ====================================================
-     */
-    const NAME = 'Treeview'
-    const DATA_KEY = 'lte.treeview'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      SELECTED: `selected${EVENT_KEY}`,
-      EXPANDED: `expanded${EVENT_KEY}`,
-      COLLAPSED: `collapsed${EVENT_KEY}`,
-      LOAD_DATA_API: `load${EVENT_KEY}`
-    }
-    const Selector = {
-      LI: '.nav-item',
-      LINK: '.nav-link',
-      TREEVIEW_MENU: '.nav-treeview',
-      OPEN: '.menu-open',
-      DATA_WIDGET: '[data-widget="treeview"]'
-    }
-    const ClassName = {
-      LI: 'nav-item',
-      LINK: 'nav-link',
-      TREEVIEW_MENU: 'nav-treeview',
-      OPEN: 'menu-open',
-      SIDEBAR_COLLAPSED: 'sidebar-collapse'
-    }
-    const Default = {
-      trigger: `${Selector.DATA_WIDGET} ${Selector.LINK}`,
-      animationSpeed: 300,
+      * Constants
+      * ====================================================
+      */
+    var NAME = "Treeview";
+    var DATA_KEY = "lte.treeview";
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      SELECTED: "selected" + EVENT_KEY,
+      EXPANDED: "expanded" + EVENT_KEY,
+      COLLAPSED: "collapsed" + EVENT_KEY,
+      LOAD_DATA_API: "load" + EVENT_KEY
+    };
+    var Selector = {
+      LI: ".nav-item",
+      LINK: ".nav-link",
+      TREEVIEW_MENU: ".nav-treeview",
+      OPEN: ".menu-open",
+      DATA_WIDGET: "[data-widget=\"treeview\"]"
+    };
+    var ClassName = {
+      LI: "nav-item",
+      LINK: "nav-link",
+      TREEVIEW_MENU: "nav-treeview",
+      OPEN: "menu-open",
+      SIDEBAR_COLLAPSED: "sidebar-collapse"
+    };
+    var Default = {
+      trigger: Selector.DATA_WIDGET + " " + Selector.LINK,
+      animationSpeed: 100,
       accordion: true,
       expandSidebar: false,
-      sidebarButtonSelector: '[data-widget="pushmenu"]'
-    }
+      sidebarButtonSelector: "[data-widget=\"pushmenu\"]"
+    };
     /**
-     * Class Definition
-     * ====================================================
-     */
+      * Class Definition
+      * ====================================================
+      */
 
-    const Treeview = /* #__PURE__*/(function () {
+    var Treeview = /*#__PURE__*/function () {
       function Treeview(element, config) {
-        this._config = config
-        this._element = element
+        this._config = config;
+        this._element = element;
       } // Public
 
 
-      const _proto = Treeview.prototype
+      var _proto = Treeview.prototype;
 
       _proto.init = function init() {
-        this._setupListeners()
-      }
+        this._setupListeners();
+      };
 
       _proto.expand = function expand(treeviewMenu, parentLi) {
-        const _this = this
+        var _this = this;
 
-        const expandedEvent = $.Event(Event.EXPANDED)
+        var expandedEvent = $.Event(Event.EXPANDED);
 
         if (this._config.accordion) {
-          const openMenuLi = parentLi.siblings(Selector.OPEN).first()
-          const openTreeview = openMenuLi.find(Selector.TREEVIEW_MENU).first()
-          this.collapse(openTreeview, openMenuLi)
+          var openMenuLi = parentLi.siblings(Selector.OPEN).first();
+          var openTreeview = openMenuLi.find(Selector.TREEVIEW_MENU).first();
+          this.collapse(openTreeview, openMenuLi);
         }
 
-        treeviewMenu.stop().slideDown(this._config.animationSpeed, () => {
-          parentLi.addClass(ClassName.OPEN)
-          $(_this._element).trigger(expandedEvent)
-        })
-
-        if (this._config.expandSidebar) {
-          this._expandSidebar()
-        }
-      }
+        treeviewMenu.stop().slideDown(this._config.animationSpeed, function () {
+          parentLi.addClass(ClassName.OPEN);
+          $(_this._element).trigger(expandedEvent);
+        });
+        if (this._config.expandSidebar) this._expandSidebar();
+      };
 
       _proto.collapse = function collapse(treeviewMenu, parentLi) {
-        const _this2 = this
+        var _this2 = this;
 
-        const collapsedEvent = $.Event(Event.COLLAPSED)
-        treeviewMenu.stop().slideUp(this._config.animationSpeed, () => {
-          parentLi.removeClass(ClassName.OPEN)
-          $(_this2._element).trigger(collapsedEvent)
-          treeviewMenu.find(`${Selector.OPEN} > ${Selector.TREEVIEW_MENU}`).slideUp()
-          treeviewMenu.find(Selector.OPEN).removeClass(ClassName.OPEN)
-        })
-      }
+        var collapsedEvent = $.Event(Event.COLLAPSED);
+        treeviewMenu.stop().slideUp(this._config.animationSpeed, function () {
+          parentLi.removeClass(ClassName.OPEN);
+          $(_this2._element).trigger(collapsedEvent);
+          treeviewMenu.find(Selector.OPEN + " > " + Selector.TREEVIEW_MENU).slideUp();
+          treeviewMenu.find(Selector.OPEN).removeClass(ClassName.OPEN);
+        });
+      };
 
       _proto.toggle = function toggle(event) {
-        const $relativeTarget = $(event.currentTarget)
-        const $parent = $relativeTarget.parent()
-        let treeviewMenu = $parent.find(`> ${Selector.TREEVIEW_MENU}`)
+        var $relativeTarget = $(event.currentTarget);
+        var $parent = $relativeTarget.parent();
+        var treeviewMenu = $parent.find("> " + Selector.TREEVIEW_MENU);
 
         if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
-          if (!$parent.is(Selector.LI)) {
-            treeviewMenu = $parent.parent().find(`> ${Selector.TREEVIEW_MENU}`)
-          }
-
-          if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) {
-            return
-          }
+          if (!$parent.is(Selector.LI)) treeviewMenu = $parent.parent().find("> " + Selector.TREEVIEW_MENU);
+          if (!treeviewMenu.is(Selector.TREEVIEW_MENU)) return;
         }
 
-        event.preventDefault()
-        const parentLi = $relativeTarget.parents(Selector.LI).first()
-        const isOpen = parentLi.hasClass(ClassName.OPEN)
-
-        if (isOpen) {
-          this.collapse($(treeviewMenu), parentLi)
-        } else {
-          this.expand($(treeviewMenu), parentLi)
-        }
+        event.preventDefault();
+        var parentLi = $relativeTarget.parents(Selector.LI).first();
+        var isOpen = parentLi.hasClass(ClassName.OPEN);
+        if (isOpen) this.collapse($(treeviewMenu), parentLi);else this.expand($(treeviewMenu), parentLi);
       } // Private
-
+      ;
 
       _proto._setupListeners = function _setupListeners() {
-        const _this3 = this
+        var _this3 = this;
 
-        $(document).on('click', this._config.trigger, (event) => {
-          _this3.toggle(event)
-        })
-      }
+        $(document).on("click", this._config.trigger, function (event) {
+          _this3.toggle(event);
+        });
+      };
 
       _proto._expandSidebar = function _expandSidebar() {
-        if ($('body').hasClass(ClassName.SIDEBAR_COLLAPSED)) {
-          $(this._config.sidebarButtonSelector).PushMenu('expand')
-        }
+        if ($("body").hasClass(ClassName.SIDEBAR_COLLAPSED)) $(this._config.sidebarButtonSelector).PushMenu("expand");
       } // Static
-
+      ;
 
       Treeview._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _options = $.extend({}, Default, $(this).data())
+          var _options = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new Treeview($(this), _options)
-            $(this).data(DATA_KEY, data)
+            data = new Treeview($(this), _options);
+            $(this).data(DATA_KEY, data);
           }
 
-          if (config === 'init') {
-            data[config]()
-          }
-        })
-      }
+          if (config === "init") data[config]();
+        });
+      };
 
-      return Treeview
-    }())
+      return Treeview;
+    }();
     /**
-     * Data API
-     * ====================================================
-     */
+      * Data API
+      * ====================================================
+      */
 
 
-    $(window).on(Event.LOAD_DATA_API, () => {
+    $(window).on(Event.LOAD_DATA_API, function () {
       $(Selector.DATA_WIDGET).each(function () {
-        Treeview._jQueryInterface.call($(this), 'init')
-      })
-    })
+        Treeview._jQueryInterface.call($(this), "init");
+      });
+    });
     /**
-     * jQuery API
-     * ====================================================
-     */
+      * jQuery API
+      * ====================================================
+      */
 
-    $.fn[NAME] = Treeview._jQueryInterface
-    $.fn[NAME].Constructor = Treeview
+    $.fn[NAME] = Treeview._jQueryInterface;
+    $.fn[NAME].Constructor = Treeview;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return Treeview._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Treeview._jQueryInterface;
+    };
 
-    return Treeview
-  }(jQuery))
+    return Treeview;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -924,58 +911,58 @@
    * License MIT
    * --------------------------------------------
    */
-  const DirectChat = (function ($) {
+  var DirectChat = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'DirectChat'
-    const DATA_KEY = 'lte.directchat'
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
+    var NAME = 'DirectChat';
+    var DATA_KEY = 'lte.directchat';
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
       TOGGLED: 'toggled{EVENT_KEY}'
-    }
-    const Selector = {
+    };
+    var Selector = {
       DATA_TOGGLE: '[data-widget="chat-pane-toggle"]',
       DIRECT_CHAT: '.direct-chat'
-    }
-    const ClassName = {
+    };
+    var ClassName = {
       DIRECT_CHAT_OPEN: 'direct-chat-contacts-open'
-    }
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const DirectChat = /* #__PURE__*/(function () {
+    var DirectChat = /*#__PURE__*/function () {
       function DirectChat(element, config) {
-        this._element = element
+        this._element = element;
       }
 
-      const _proto = DirectChat.prototype
+      var _proto = DirectChat.prototype;
 
       _proto.toggle = function toggle() {
-        $(this._element).parents(Selector.DIRECT_CHAT).first().toggleClass(ClassName.DIRECT_CHAT_OPEN)
-        const toggledEvent = $.Event(Event.TOGGLED)
-        $(this._element).trigger(toggledEvent)
+        $(this._element).parents(Selector.DIRECT_CHAT).first().toggleClass(ClassName.DIRECT_CHAT_OPEN);
+        var toggledEvent = $.Event(Event.TOGGLED);
+        $(this._element).trigger(toggledEvent);
       } // Static
-
+      ;
 
       DirectChat._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
           if (!data) {
-            data = new DirectChat($(this))
-            $(this).data(DATA_KEY, data)
+            data = new DirectChat($(this));
+            $(this).data(DATA_KEY, data);
           }
 
-          data[config]()
-        })
-      }
+          data[config]();
+        });
+      };
 
-      return DirectChat
-    }())
+      return DirectChat;
+    }();
     /**
      *
      * Data Api implementation
@@ -985,26 +972,26 @@
 
     $(document).on('click', Selector.DATA_TOGGLE, function (event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      DirectChat._jQueryInterface.call($(this), 'toggle')
-    })
+      DirectChat._jQueryInterface.call($(this), 'toggle');
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = DirectChat._jQueryInterface
-    $.fn[NAME].Constructor = DirectChat
+    $.fn[NAME] = DirectChat._jQueryInterface;
+    $.fn[NAME].Constructor = DirectChat;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return DirectChat._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return DirectChat._jQueryInterface;
+    };
 
-    return DirectChat
-  }(jQuery))
+    return DirectChat;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -1012,116 +999,116 @@
    * License MIT
    * --------------------------------------------
    */
-  const TodoList = (function ($) {
+  var TodoList = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'TodoList'
-    const DATA_KEY = 'lte.todolist'
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Selector = {
+    var NAME = 'TodoList';
+    var DATA_KEY = 'lte.todolist';
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Selector = {
       DATA_TOGGLE: '[data-widget="todo-list"]'
-    }
-    const ClassName = {
+    };
+    var ClassName = {
       TODO_LIST_DONE: 'done'
-    }
-    const Default = {
+    };
+    var Default = {
       onCheck: function onCheck(item) {
-        return item
+        return item;
       },
       onUnCheck: function onUnCheck(item) {
-        return item
+        return item;
       }
-    }
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const TodoList = /* #__PURE__*/(function () {
+    var TodoList = /*#__PURE__*/function () {
       function TodoList(element, config) {
-        this._config = config
-        this._element = element
+        this._config = config;
+        this._element = element;
 
-        this._init()
+        this._init();
       } // Public
 
 
-      const _proto = TodoList.prototype
+      var _proto = TodoList.prototype;
 
       _proto.toggle = function toggle(item) {
-        item.parents('li').toggleClass(ClassName.TODO_LIST_DONE)
+        item.parents('li').toggleClass(ClassName.TODO_LIST_DONE);
 
         if (!$(item).prop('checked')) {
-          this.unCheck($(item))
-          return
+          this.unCheck($(item));
+          return;
         }
 
-        this.check(item)
-      }
+        this.check(item);
+      };
 
       _proto.check = function check(item) {
-        this._config.onCheck.call(item)
-      }
+        this._config.onCheck.call(item);
+      };
 
       _proto.unCheck = function unCheck(item) {
-        this._config.onUnCheck.call(item)
+        this._config.onUnCheck.call(item);
       } // Private
-
+      ;
 
       _proto._init = function _init() {
-        const that = this
-        $(Selector.DATA_TOGGLE).find('input:checkbox:checked').parents('li').toggleClass(ClassName.TODO_LIST_DONE)
-        $(Selector.DATA_TOGGLE).on('change', 'input:checkbox', (event) => {
-          that.toggle($(event.target))
-        })
+        var that = this;
+        $(Selector.DATA_TOGGLE).find('input:checkbox:checked').parents('li').toggleClass(ClassName.TODO_LIST_DONE);
+        $(Selector.DATA_TOGGLE).on('change', 'input:checkbox', function (event) {
+          that.toggle($(event.target));
+        });
       } // Static
-
+      ;
 
       TodoList._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _options = $.extend({}, Default, $(this).data())
+          var _options = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new TodoList($(this), _options)
-            $(this).data(DATA_KEY, data)
+            data = new TodoList($(this), _options);
+            $(this).data(DATA_KEY, data);
           }
 
           if (config === 'init') {
-            data[config]()
+            data[config]();
           }
-        })
-      }
+        });
+      };
 
-      return TodoList
-    }())
+      return TodoList;
+    }();
     /**
      * Data API
      * ====================================================
      */
 
 
-    $(window).on('load', () => {
-      TodoList._jQueryInterface.call($(Selector.DATA_TOGGLE))
-    })
+    $(window).on('load', function () {
+      TodoList._jQueryInterface.call($(Selector.DATA_TOGGLE));
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = TodoList._jQueryInterface
-    $.fn[NAME].Constructor = TodoList
+    $.fn[NAME] = TodoList._jQueryInterface;
+    $.fn[NAME].Constructor = TodoList;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return TodoList._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return TodoList._jQueryInterface;
+    };
 
-    return TodoList
-  }(jQuery))
+    return TodoList;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -1129,41 +1116,41 @@
    * License MIT
    * --------------------------------------------
    */
-  const CardWidget = (function ($) {
+  var CardWidget = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'CardWidget'
-    const DATA_KEY = 'lte.cardwidget'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      EXPANDED: `expanded${EVENT_KEY}`,
-      COLLAPSED: `collapsed${EVENT_KEY}`,
-      MAXIMIZED: `maximized${EVENT_KEY}`,
-      MINIMIZED: `minimized${EVENT_KEY}`,
-      REMOVED: `removed${EVENT_KEY}`
-    }
-    const ClassName = {
+    var NAME = 'CardWidget';
+    var DATA_KEY = 'lte.cardwidget';
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      EXPANDED: "expanded" + EVENT_KEY,
+      COLLAPSED: "collapsed" + EVENT_KEY,
+      MAXIMIZED: "maximized" + EVENT_KEY,
+      MINIMIZED: "minimized" + EVENT_KEY,
+      REMOVED: "removed" + EVENT_KEY
+    };
+    var ClassName = {
       CARD: 'card',
       COLLAPSED: 'collapsed-card',
       COLLAPSING: 'collapsing-card',
       EXPANDING: 'expanding-card',
       WAS_COLLAPSED: 'was-collapsed',
       MAXIMIZED: 'maximized-card'
-    }
-    const Selector = {
+    };
+    var Selector = {
       DATA_REMOVE: '[data-card-widget="remove"]',
       DATA_COLLAPSE: '[data-card-widget="collapse"]',
       DATA_MAXIMIZE: '[data-card-widget="maximize"]',
-      CARD: `.${ClassName.CARD}`,
+      CARD: "." + ClassName.CARD,
       CARD_HEADER: '.card-header',
       CARD_BODY: '.card-body',
       CARD_FOOTER: '.card-footer',
-      COLLAPSED: `.${ClassName.COLLAPSED}`
-    }
-    const Default = {
+      COLLAPSED: "." + ClassName.COLLAPSED
+    };
+    var Default = {
       animationSpeed: 'normal',
       collapseTrigger: Selector.DATA_COLLAPSE,
       removeTrigger: Selector.DATA_REMOVE,
@@ -1172,158 +1159,158 @@
       expandIcon: 'fa-plus',
       maximizeIcon: 'fa-expand',
       minimizeIcon: 'fa-compress'
-    }
+    };
 
-    const CardWidget = /* #__PURE__*/(function () {
+    var CardWidget = /*#__PURE__*/function () {
       function CardWidget(element, settings) {
-        this._element = element
-        this._parent = element.parents(Selector.CARD).first()
+        this._element = element;
+        this._parent = element.parents(Selector.CARD).first();
 
         if (element.hasClass(ClassName.CARD)) {
-          this._parent = element
+          this._parent = element;
         }
 
-        this._settings = $.extend({}, Default, settings)
+        this._settings = $.extend({}, Default, settings);
       }
 
-      const _proto = CardWidget.prototype
+      var _proto = CardWidget.prototype;
 
       _proto.collapse = function collapse() {
-        const _this = this
+        var _this = this;
 
-        this._parent.addClass(ClassName.COLLAPSING).children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`).slideUp(this._settings.animationSpeed, () => {
-          _this._parent.addClass(ClassName.COLLAPSED).removeClass(ClassName.COLLAPSING)
-        })
+        this._parent.addClass(ClassName.COLLAPSING).children(Selector.CARD_BODY + ", " + Selector.CARD_FOOTER).slideUp(this._settings.animationSpeed, function () {
+          _this._parent.addClass(ClassName.COLLAPSED).removeClass(ClassName.COLLAPSING);
+        });
 
-        this._parent.find(`> ${Selector.CARD_HEADER} ${this._settings.collapseTrigger} .${this._settings.collapseIcon}`).addClass(this._settings.expandIcon).removeClass(this._settings.collapseIcon)
+        this._parent.find("> " + Selector.CARD_HEADER + " " + this._settings.collapseTrigger + " ." + this._settings.collapseIcon).addClass(this._settings.expandIcon).removeClass(this._settings.collapseIcon);
 
-        const collapsed = $.Event(Event.COLLAPSED)
+        var collapsed = $.Event(Event.COLLAPSED);
 
-        this._element.trigger(collapsed, this._parent)
-      }
+        this._element.trigger(collapsed, this._parent);
+      };
 
       _proto.expand = function expand() {
-        const _this2 = this
+        var _this2 = this;
 
-        this._parent.addClass(ClassName.EXPANDING).children(`${Selector.CARD_BODY}, ${Selector.CARD_FOOTER}`).slideDown(this._settings.animationSpeed, () => {
-          _this2._parent.removeClass(ClassName.COLLAPSED).removeClass(ClassName.EXPANDING)
-        })
+        this._parent.addClass(ClassName.EXPANDING).children(Selector.CARD_BODY + ", " + Selector.CARD_FOOTER).slideDown(this._settings.animationSpeed, function () {
+          _this2._parent.removeClass(ClassName.COLLAPSED).removeClass(ClassName.EXPANDING);
+        });
 
-        this._parent.find(`> ${Selector.CARD_HEADER} ${this._settings.collapseTrigger} .${this._settings.expandIcon}`).addClass(this._settings.collapseIcon).removeClass(this._settings.expandIcon)
+        this._parent.find("> " + Selector.CARD_HEADER + " " + this._settings.collapseTrigger + " ." + this._settings.expandIcon).addClass(this._settings.collapseIcon).removeClass(this._settings.expandIcon);
 
-        const expanded = $.Event(Event.EXPANDED)
+        var expanded = $.Event(Event.EXPANDED);
 
-        this._element.trigger(expanded, this._parent)
-      }
+        this._element.trigger(expanded, this._parent);
+      };
 
       _proto.remove = function remove() {
-        this._parent.slideUp()
+        this._parent.slideUp();
 
-        const removed = $.Event(Event.REMOVED)
+        var removed = $.Event(Event.REMOVED);
 
-        this._element.trigger(removed, this._parent)
-      }
+        this._element.trigger(removed, this._parent);
+      };
 
       _proto.toggle = function toggle() {
         if (this._parent.hasClass(ClassName.COLLAPSED)) {
-          this.expand()
-          return
+          this.expand();
+          return;
         }
 
-        this.collapse()
-      }
+        this.collapse();
+      };
 
       _proto.maximize = function maximize() {
-        this._parent.find(`${this._settings.maximizeTrigger} .${this._settings.maximizeIcon}`).addClass(this._settings.minimizeIcon).removeClass(this._settings.maximizeIcon)
+        this._parent.find(this._settings.maximizeTrigger + " ." + this._settings.maximizeIcon).addClass(this._settings.minimizeIcon).removeClass(this._settings.maximizeIcon);
 
         this._parent.css({
           height: this._parent.height(),
           width: this._parent.width(),
           transition: 'all .15s'
         }).delay(150).queue(function () {
-          $(this).addClass(ClassName.MAXIMIZED)
-          $('html').addClass(ClassName.MAXIMIZED)
+          $(this).addClass(ClassName.MAXIMIZED);
+          $('html').addClass(ClassName.MAXIMIZED);
 
           if ($(this).hasClass(ClassName.COLLAPSED)) {
-            $(this).addClass(ClassName.WAS_COLLAPSED)
+            $(this).addClass(ClassName.WAS_COLLAPSED);
           }
 
-          $(this).dequeue()
-        })
+          $(this).dequeue();
+        });
 
-        const maximized = $.Event(Event.MAXIMIZED)
+        var maximized = $.Event(Event.MAXIMIZED);
 
-        this._element.trigger(maximized, this._parent)
-      }
+        this._element.trigger(maximized, this._parent);
+      };
 
       _proto.minimize = function minimize() {
-        this._parent.find(`${this._settings.maximizeTrigger} .${this._settings.minimizeIcon}`).addClass(this._settings.maximizeIcon).removeClass(this._settings.minimizeIcon)
+        this._parent.find(this._settings.maximizeTrigger + " ." + this._settings.minimizeIcon).addClass(this._settings.maximizeIcon).removeClass(this._settings.minimizeIcon);
 
-        this._parent.css('cssText', `height:${this._parent[0].style.height} !important;` + `width:${this._parent[0].style.width} !important; transition: all .15s;`).delay(10).queue(function () {
-          $(this).removeClass(ClassName.MAXIMIZED)
-          $('html').removeClass(ClassName.MAXIMIZED)
+        this._parent.css('cssText', "height:" + this._parent[0].style.height + " !important;" + ("width:" + this._parent[0].style.width + " !important; transition: all .15s;")).delay(10).queue(function () {
+          $(this).removeClass(ClassName.MAXIMIZED);
+          $('html').removeClass(ClassName.MAXIMIZED);
           $(this).css({
             height: 'inherit',
             width: 'inherit'
-          })
+          });
 
           if ($(this).hasClass(ClassName.WAS_COLLAPSED)) {
-            $(this).removeClass(ClassName.WAS_COLLAPSED)
+            $(this).removeClass(ClassName.WAS_COLLAPSED);
           }
 
-          $(this).dequeue()
-        })
+          $(this).dequeue();
+        });
 
-        const MINIMIZED = $.Event(Event.MINIMIZED)
+        var MINIMIZED = $.Event(Event.MINIMIZED);
 
-        this._element.trigger(MINIMIZED, this._parent)
-      }
+        this._element.trigger(MINIMIZED, this._parent);
+      };
 
       _proto.toggleMaximize = function toggleMaximize() {
         if (this._parent.hasClass(ClassName.MAXIMIZED)) {
-          this.minimize()
-          return
+          this.minimize();
+          return;
         }
 
-        this.maximize()
+        this.maximize();
       } // Private
-
+      ;
 
       _proto._init = function _init(card) {
-        const _this3 = this
+        var _this3 = this;
 
-        this._parent = card
-        $(this).find(this._settings.collapseTrigger).click(() => {
-          _this3.toggle()
-        })
-        $(this).find(this._settings.maximizeTrigger).click(() => {
-          _this3.toggleMaximize()
-        })
-        $(this).find(this._settings.removeTrigger).click(() => {
-          _this3.remove()
-        })
+        this._parent = card;
+        $(this).find(this._settings.collapseTrigger).click(function () {
+          _this3.toggle();
+        });
+        $(this).find(this._settings.maximizeTrigger).click(function () {
+          _this3.toggleMaximize();
+        });
+        $(this).find(this._settings.removeTrigger).click(function () {
+          _this3.remove();
+        });
       } // Static
-
+      ;
 
       CardWidget._jQueryInterface = function _jQueryInterface(config) {
-        let data = $(this).data(DATA_KEY)
+        var data = $(this).data(DATA_KEY);
 
-        const _options = $.extend({}, Default, $(this).data())
+        var _options = $.extend({}, Default, $(this).data());
 
         if (!data) {
-          data = new CardWidget($(this), _options)
-          $(this).data(DATA_KEY, typeof config === 'string' ? data : config)
+          data = new CardWidget($(this), _options);
+          $(this).data(DATA_KEY, typeof config === 'string' ? data : config);
         }
 
         if (typeof config === 'string' && config.match(/collapse|expand|remove|toggle|maximize|minimize|toggleMaximize/)) {
-          data[config]()
+          data[config]();
         } else if (typeof config === 'object') {
-          data._init($(this))
+          data._init($(this));
         }
-      }
+      };
 
-      return CardWidget
-    }())
+      return CardWidget;
+    }();
     /**
      * Data API
      * ====================================================
@@ -1332,40 +1319,40 @@
 
     $(document).on('click', Selector.DATA_COLLAPSE, function (event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      CardWidget._jQueryInterface.call($(this), 'toggle')
-    })
+      CardWidget._jQueryInterface.call($(this), 'toggle');
+    });
     $(document).on('click', Selector.DATA_REMOVE, function (event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      CardWidget._jQueryInterface.call($(this), 'remove')
-    })
+      CardWidget._jQueryInterface.call($(this), 'remove');
+    });
     $(document).on('click', Selector.DATA_MAXIMIZE, function (event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      CardWidget._jQueryInterface.call($(this), 'toggleMaximize')
-    })
+      CardWidget._jQueryInterface.call($(this), 'toggleMaximize');
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = CardWidget._jQueryInterface
-    $.fn[NAME].Constructor = CardWidget
+    $.fn[NAME] = CardWidget._jQueryInterface;
+    $.fn[NAME].Constructor = CardWidget;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return CardWidget._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return CardWidget._jQueryInterface;
+    };
 
-    return CardWidget
-  }(jQuery))
+    return CardWidget;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -1373,28 +1360,28 @@
    * License MIT
    * --------------------------------------------
    */
-  const CardRefresh = (function ($) {
+  var CardRefresh = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'CardRefresh'
-    const DATA_KEY = 'lte.cardrefresh'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      LOADED: `loaded${EVENT_KEY}`,
-      OVERLAY_ADDED: `overlay.added${EVENT_KEY}`,
-      OVERLAY_REMOVED: `overlay.removed${EVENT_KEY}`
-    }
-    const ClassName = {
+    var NAME = 'CardRefresh';
+    var DATA_KEY = 'lte.cardrefresh';
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      LOADED: "loaded" + EVENT_KEY,
+      OVERLAY_ADDED: "overlay.added" + EVENT_KEY,
+      OVERLAY_REMOVED: "overlay.removed" + EVENT_KEY
+    };
+    var ClassName = {
       CARD: 'card'
-    }
-    const Selector = {
-      CARD: `.${ClassName.CARD}`,
+    };
+    var Selector = {
+      CARD: "." + ClassName.CARD,
       DATA_REFRESH: '[data-card-widget="card-refresh"]'
-    }
-    const Default = {
+    };
+    var Default = {
       source: '',
       sourceSelector: '',
       params: {},
@@ -1406,97 +1393,99 @@
       overlayTemplate: '<div class="overlay"><i class="fas fa-2x fa-sync-alt fa-spin"></i></div>',
       onLoadStart: function onLoadStart() {},
       onLoadDone: function onLoadDone(response) {
-        return response
+        return response;
       }
-    }
+    };
 
-    const CardRefresh = /* #__PURE__*/(function () {
+    var CardRefresh = /*#__PURE__*/function () {
       function CardRefresh(element, settings) {
-        this._element = element
-        this._parent = element.parents(Selector.CARD).first()
-        this._settings = $.extend({}, Default, settings)
-        this._overlay = $(this._settings.overlayTemplate)
+        this._element = element;
+        this._parent = element.parents(Selector.CARD).first();
+        this._settings = $.extend({}, Default, settings);
+        this._overlay = $(this._settings.overlayTemplate);
 
         if (element.hasClass(ClassName.CARD)) {
-          this._parent = element
+          this._parent = element;
         }
 
         if (this._settings.source === '') {
-          throw new Error('Source url was not defined. Please specify a url in your CardRefresh source option.')
+          throw new Error('Source url was not defined. Please specify a url in your CardRefresh source option.');
         }
       }
 
-      const _proto = CardRefresh.prototype
+      var _proto = CardRefresh.prototype;
 
       _proto.load = function load() {
-        this._addOverlay()
+        var _this = this;
 
-        this._settings.onLoadStart.call($(this))
+        this._addOverlay();
 
-        $.get(this._settings.source, this._settings.params, (response) => {
-          if (this._settings.loadInContent) {
-            if (this._settings.sourceSelector != '') {
-              response = $(response).find(this._settings.sourceSelector).html()
+        this._settings.onLoadStart.call($(this));
+
+        $.get(this._settings.source, this._settings.params, function (response) {
+          if (_this._settings.loadInContent) {
+            if (_this._settings.sourceSelector != '') {
+              response = $(response).find(_this._settings.sourceSelector).html();
             }
 
-            this._parent.find(this._settings.content).html(response)
+            _this._parent.find(_this._settings.content).html(response);
           }
 
-          this._settings.onLoadDone.call($(this), response)
+          _this._settings.onLoadDone.call($(_this), response);
 
-          this._removeOverlay()
-        }, this._settings.responseType !== '' && this._settings.responseType)
-        const loadedEvent = $.Event(Event.LOADED)
-        $(this._element).trigger(loadedEvent)
-      }
+          _this._removeOverlay();
+        }, this._settings.responseType !== '' && this._settings.responseType);
+        var loadedEvent = $.Event(Event.LOADED);
+        $(this._element).trigger(loadedEvent);
+      };
 
       _proto._addOverlay = function _addOverlay() {
-        this._parent.append(this._overlay)
+        this._parent.append(this._overlay);
 
-        const overlayAddedEvent = $.Event(Event.OVERLAY_ADDED)
-        $(this._element).trigger(overlayAddedEvent)
-      }
+        var overlayAddedEvent = $.Event(Event.OVERLAY_ADDED);
+        $(this._element).trigger(overlayAddedEvent);
+      };
 
       _proto._removeOverlay = function _removeOverlay() {
-        this._parent.find(this._overlay).remove()
+        this._parent.find(this._overlay).remove();
 
-        const overlayRemovedEvent = $.Event(Event.OVERLAY_REMOVED)
-        $(this._element).trigger(overlayRemovedEvent)
-      }
+        var overlayRemovedEvent = $.Event(Event.OVERLAY_REMOVED);
+        $(this._element).trigger(overlayRemovedEvent);
+      } // Private
+      ;
 
-      // Private
       _proto._init = function _init(card) {
-        const _this = this
+        var _this2 = this;
 
-        $(this).find(this._settings.trigger).on('click', () => {
-          _this.load()
-        })
+        $(this).find(this._settings.trigger).on('click', function () {
+          _this2.load();
+        });
 
         if (this._settings.loadOnInit) {
-          this.load()
+          this.load();
         }
       } // Static
-
+      ;
 
       CardRefresh._jQueryInterface = function _jQueryInterface(config) {
-        let data = $(this).data(DATA_KEY)
+        var data = $(this).data(DATA_KEY);
 
-        const _options = $.extend({}, Default, $(this).data())
+        var _options = $.extend({}, Default, $(this).data());
 
         if (!data) {
-          data = new CardRefresh($(this), _options)
-          $(this).data(DATA_KEY, typeof config === 'string' ? data : config)
+          data = new CardRefresh($(this), _options);
+          $(this).data(DATA_KEY, typeof config === 'string' ? data : config);
         }
 
         if (typeof config === 'string' && config.match(/load/)) {
-          data[config]()
+          data[config]();
         } else {
-          data._init($(this))
+          data._init($(this));
         }
-      }
+      };
 
-      return CardRefresh
-    }())
+      return CardRefresh;
+    }();
     /**
      * Data API
      * ====================================================
@@ -1505,31 +1494,33 @@
 
     $(document).on('click', Selector.DATA_REFRESH, function (event) {
       if (event) {
-        event.preventDefault()
+        event.preventDefault();
       }
 
-      CardRefresh._jQueryInterface.call($(this), 'load')
-    })
-    $(document).ready(() => {
+      CardRefresh._jQueryInterface.call($(this), 'load');
+    });
+    $(document).ready(function () {
       $(Selector.DATA_REFRESH).each(function () {
-        CardRefresh._jQueryInterface.call($(this))
-      })
-    })
+        CardRefresh._jQueryInterface.call($(this));
+      });
+    });
     /**
      * jQuery API
      * ====================================================
      */
 
-    $.fn[NAME] = CardRefresh._jQueryInterface
-    $.fn[NAME].Constructor = CardRefresh
+    $.fn[NAME] = CardRefresh._jQueryInterface;
+    $.fn[NAME].Constructor = CardRefresh;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return CardRefresh._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return CardRefresh._jQueryInterface;
+    };
 
-    return CardRefresh
-  }(jQuery))
+    return CardRefresh;
+  }(jQuery);
+
+  /* eslint-disable no-unused-vars,eqeqeq */
 
   /**
    * --------------------------------------------
@@ -1537,131 +1528,127 @@
    * License MIT
    * --------------------------------------------
    */
-  const Dropdown = (function ($) {
+  var Dropdown = function ($) {
     /**
-     * Constants
-     * ====================================================
-     */
-    const NAME = 'Dropdown'
-    const DATA_KEY = 'lte.dropdown'
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Selector = {
-      NAVBAR: '.navbar',
-      DROPDOWN_MENU: '.dropdown-menu',
-      DROPDOWN_MENU_ACTIVE: '.dropdown-menu.show',
-      DROPDOWN_TOGGLE: '[data-toggle="dropdown"]'
-    }
-    const ClassName = {
-      DROPDOWN_HOVER: 'dropdown-hover',
-      DROPDOWN_RIGHT: 'dropdown-menu-right'
-    }
-    const Default = {}
+      * Constants
+      * ====================================================
+      */
+    var NAME = "Dropdown";
+    var DATA_KEY = "lte.dropdown";
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Selector = {
+      NAVBAR: ".navbar",
+      DROPDOWN_MENU: ".dropdown-menu",
+      DROPDOWN_MENU_ACTIVE: ".dropdown-menu.show",
+      DROPDOWN_TOGGLE: "[data-toggle=\"dropdown\"]"
+    };
+    var ClassName = {
+      DROPDOWN_HOVER: "dropdown-hover",
+      DROPDOWN_RIGHT: "dropdown-menu-right"
+    };
+    var Default = {};
     /**
-     * Class Definition
-     * ====================================================
-     */
+      * Class Definition
+      * ====================================================
+      */
 
-    const Dropdown = /* #__PURE__*/(function () {
+    var Dropdown = /*#__PURE__*/function () {
       function Dropdown(element, config) {
-        this._config = config
-        this._element = element
+        this._config = config;
+        this._element = element;
       } // Public
 
 
-      const _proto = Dropdown.prototype
+      var _proto = Dropdown.prototype;
 
       _proto.toggleSubmenu = function toggleSubmenu() {
-        this._element.siblings().show().toggleClass('show')
+        this._element.siblings().show().toggleClass("show");
 
-        if (!this._element.next().hasClass('show')) {
-          this._element.parents('.dropdown-menu').first().find('.show').removeClass('show').hide()
-        }
+        if (!this._element.next().hasClass("show")) this._element.parents(".dropdown-menu").first().find(".show").removeClass("show").hide();
 
-        this._element.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', (e) => {
-          $('.dropdown-submenu .show').removeClass('show').hide()
-        })
-      }
+        this._element.parents("li.nav-item.dropdown.show").on("hidden.bs.dropdown", function (e) {
+          $(".dropdown-submenu .show").removeClass("show").hide();
+        });
+      };
 
       _proto.fixPosition = function fixPosition() {
-        const elm = $(Selector.DROPDOWN_MENU_ACTIVE)
+        var elm = $(Selector.DROPDOWN_MENU_ACTIVE);
 
         if (elm.length !== 0) {
           if (elm.hasClass(ClassName.DROPDOWN_RIGHT)) {
-            elm.css('left', 'inherit')
-            elm.css('right', 0)
+            elm.css("left", "inherit");
+            elm.css("right", 0);
           } else {
-            elm.css('left', 0)
-            elm.css('right', 'inherit')
+            elm.css("left", 0);
+            elm.css("right", "inherit");
           }
 
-          const offset = elm.offset()
-          const width = elm.width()
-          const windowWidth = $(window).width()
-          const visiblePart = windowWidth - offset.left
+          var offset = elm.offset();
+          var width = elm.width();
+          var windowWidth = $(window).width();
+          var visiblePart = windowWidth - offset.left;
 
           if (offset.left < 0) {
-            elm.css('left', 'inherit')
-            elm.css('right', offset.left - 5)
+            elm.css("left", "inherit");
+            elm.css("right", offset.left - 5);
           } else if (visiblePart < width) {
-            elm.css('left', 'inherit')
-            elm.css('right', 0)
+            elm.css("left", "inherit");
+            elm.css("right", 0);
           }
         }
       } // Static
-
+      ;
 
       Dropdown._jQueryInterface = function _jQueryInterface(config) {
         return this.each(function () {
-          let data = $(this).data(DATA_KEY)
+          var data = $(this).data(DATA_KEY);
 
-          const _config = $.extend({}, Default, $(this).data())
+          var _config = $.extend({}, Default, $(this).data());
 
           if (!data) {
-            data = new Dropdown($(this), _config)
-            $(this).data(DATA_KEY, data)
+            data = new Dropdown($(this), _config);
+            $(this).data(DATA_KEY, data);
           }
 
-          if (config === 'toggleSubmenu' || config == 'fixPosition') {
-            data[config]()
-          }
-        })
-      }
+          if (config === "toggleSubmenu" || config == "fixPosition") data[config]();
+        });
+      };
 
-      return Dropdown
-    }())
+      return Dropdown;
+    }();
     /**
-     * Data API
-     * ====================================================
-     */
+      * Data API
+      * ====================================================
+      */
 
 
-    $(`${Selector.DROPDOWN_MENU} ${Selector.DROPDOWN_TOGGLE}`).on('click', function (event) {
-      event.preventDefault()
-      event.stopPropagation()
+    $(Selector.DROPDOWN_MENU + " " + Selector.DROPDOWN_TOGGLE).on("click", function (event) {
+      event.preventDefault();
+      event.stopPropagation();
 
-      Dropdown._jQueryInterface.call($(this), 'toggleSubmenu')
-    })
-    $(`${Selector.NAVBAR} ${Selector.DROPDOWN_TOGGLE}`).on('click', (event) => {
-      event.preventDefault()
+      Dropdown._jQueryInterface.call($(this), "toggleSubmenu");
+    });
+    $(Selector.NAVBAR + " " + Selector.DROPDOWN_TOGGLE).on("click", function (event) {
+      event.preventDefault();
       setTimeout(function () {
-        Dropdown._jQueryInterface.call($(this), 'fixPosition')
-      }, 1)
-    })
+        Dropdown._jQueryInterface.call($(this), "fixPosition");
+      }, 1);
+    });
     /**
-     * jQuery API
-     * ====================================================
-     */
+      * jQuery API
+      * ====================================================
+      */
 
-    $.fn[NAME] = Dropdown._jQueryInterface
-    $.fn[NAME].Constructor = Dropdown
+    $.fn[NAME] = Dropdown._jQueryInterface;
+    $.fn[NAME].Constructor = Dropdown;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return Dropdown._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Dropdown._jQueryInterface;
+    };
 
-    return Dropdown
-  }(jQuery))
+    return Dropdown;
+  }(jQuery);
 
   /**
    * --------------------------------------------
@@ -1669,41 +1656,41 @@
    * License MIT
    * --------------------------------------------
    */
-  const Toasts = (function ($) {
+  var Toasts = function ($) {
     /**
      * Constants
      * ====================================================
      */
-    const NAME = 'Toasts'
-    const DATA_KEY = 'lte.toasts'
-    const EVENT_KEY = `.${DATA_KEY}`
-    const JQUERY_NO_CONFLICT = $.fn[NAME]
-    const Event = {
-      INIT: `init${EVENT_KEY}`,
-      CREATED: `created${EVENT_KEY}`,
-      REMOVED: `removed${EVENT_KEY}`
-    }
-    const Selector = {
+    var NAME = 'Toasts';
+    var DATA_KEY = 'lte.toasts';
+    var EVENT_KEY = "." + DATA_KEY;
+    var JQUERY_NO_CONFLICT = $.fn[NAME];
+    var Event = {
+      INIT: "init" + EVENT_KEY,
+      CREATED: "created" + EVENT_KEY,
+      REMOVED: "removed" + EVENT_KEY
+    };
+    var Selector = {
       BODY: 'toast-body',
       CONTAINER_TOP_RIGHT: '#toastsContainerTopRight',
       CONTAINER_TOP_LEFT: '#toastsContainerTopLeft',
       CONTAINER_BOTTOM_RIGHT: '#toastsContainerBottomRight',
       CONTAINER_BOTTOM_LEFT: '#toastsContainerBottomLeft'
-    }
-    const ClassName = {
+    };
+    var ClassName = {
       TOP_RIGHT: 'toasts-top-right',
       TOP_LEFT: 'toasts-top-left',
       BOTTOM_RIGHT: 'toasts-bottom-right',
       BOTTOM_LEFT: 'toasts-bottom-left',
       FADE: 'fade'
-    }
-    const Position = {
+    };
+    var Position = {
       TOP_RIGHT: 'topRight',
       TOP_LEFT: 'topLeft',
       BOTTOM_RIGHT: 'bottomRight',
       BOTTOM_LEFT: 'bottomLeft'
-    }
-    const Default = {
+    };
+    var Default = {
       position: Position.TOP_RIGHT,
       fixed: true,
       autohide: false,
@@ -1719,174 +1706,173 @@
       close: true,
       body: null,
       class: null
-    }
+    };
     /**
      * Class Definition
      * ====================================================
      */
 
-    const Toasts = /* #__PURE__*/(function () {
+    var Toasts = /*#__PURE__*/function () {
       function Toasts(element, config) {
-        this._config = config
+        this._config = config;
 
-        this._prepareContainer()
+        this._prepareContainer();
 
-        const initEvent = $.Event(Event.INIT)
-        $('body').trigger(initEvent)
+        var initEvent = $.Event(Event.INIT);
+        $('body').trigger(initEvent);
       } // Public
 
 
-      const _proto = Toasts.prototype
+      var _proto = Toasts.prototype;
 
       _proto.create = function create() {
-        const toast = $('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"/>')
-        toast.data('autohide', this._config.autohide)
-        toast.data('animation', this._config.fade)
+        var toast = $('<div class="toast" role="alert" aria-live="assertive" aria-atomic="true"/>');
+        toast.data('autohide', this._config.autohide);
+        toast.data('animation', this._config.fade);
 
         if (this._config.class) {
-          toast.addClass(this._config.class)
+          toast.addClass(this._config.class);
         }
 
         if (this._config.delay && this._config.delay != 500) {
-          toast.data('delay', this._config.delay)
+          toast.data('delay', this._config.delay);
         }
 
-        const toast_header = $('<div class="toast-header">')
+        var toast_header = $('<div class="toast-header">');
 
         if (this._config.image != null) {
-          const toast_image = $('<img />').addClass('rounded mr-2').attr('src', this._config.image).attr('alt', this._config.imageAlt)
+          var toast_image = $('<img />').addClass('rounded mr-2').attr('src', this._config.image).attr('alt', this._config.imageAlt);
 
           if (this._config.imageHeight != null) {
-            toast_image.height(this._config.imageHeight).width('auto')
+            toast_image.height(this._config.imageHeight).width('auto');
           }
 
-          toast_header.append(toast_image)
+          toast_header.append(toast_image);
         }
 
         if (this._config.icon != null) {
-          toast_header.append($('<i />').addClass('mr-2').addClass(this._config.icon))
+          toast_header.append($('<i />').addClass('mr-2').addClass(this._config.icon));
         }
 
         if (this._config.title != null) {
-          toast_header.append($('<strong />').addClass('mr-auto').html(this._config.title))
+          toast_header.append($('<strong />').addClass('mr-auto').html(this._config.title));
         }
 
         if (this._config.subtitle != null) {
-          toast_header.append($('<small />').html(this._config.subtitle))
+          toast_header.append($('<small />').html(this._config.subtitle));
         }
 
         if (this._config.close == true) {
-          const toast_close = $('<button data-dismiss="toast" />').attr('type', 'button').addClass('ml-2 mb-1 close').attr('aria-label', 'Close').append('<span aria-hidden="true">&times;</span>')
+          var toast_close = $('<button data-dismiss="toast" />').attr('type', 'button').addClass('ml-2 mb-1 close').attr('aria-label', 'Close').append('<span aria-hidden="true">&times;</span>');
 
           if (this._config.title == null) {
-            toast_close.toggleClass('ml-2 ml-auto')
+            toast_close.toggleClass('ml-2 ml-auto');
           }
 
-          toast_header.append(toast_close)
+          toast_header.append(toast_close);
         }
 
-        toast.append(toast_header)
+        toast.append(toast_header);
 
         if (this._config.body != null) {
-          toast.append($('<div class="toast-body" />').html(this._config.body))
+          toast.append($('<div class="toast-body" />').html(this._config.body));
         }
 
-        $(this._getContainerId()).prepend(toast)
-        const createdEvent = $.Event(Event.CREATED)
-        $('body').trigger(createdEvent)
-        toast.toast('show')
+        $(this._getContainerId()).prepend(toast);
+        var createdEvent = $.Event(Event.CREATED);
+        $('body').trigger(createdEvent);
+        toast.toast('show');
 
         if (this._config.autoremove) {
           toast.on('hidden.bs.toast', function () {
-            $(this).delay(200).remove()
-            const removedEvent = $.Event(Event.REMOVED)
-            $('body').trigger(removedEvent)
-          })
+            $(this).delay(200).remove();
+            var removedEvent = $.Event(Event.REMOVED);
+            $('body').trigger(removedEvent);
+          });
         }
       } // Static
-
+      ;
 
       _proto._getContainerId = function _getContainerId() {
         if (this._config.position == Position.TOP_RIGHT) {
-          return Selector.CONTAINER_TOP_RIGHT
+          return Selector.CONTAINER_TOP_RIGHT;
         } else if (this._config.position == Position.TOP_LEFT) {
-          return Selector.CONTAINER_TOP_LEFT
+          return Selector.CONTAINER_TOP_LEFT;
         } else if (this._config.position == Position.BOTTOM_RIGHT) {
-          return Selector.CONTAINER_BOTTOM_RIGHT
+          return Selector.CONTAINER_BOTTOM_RIGHT;
         } else if (this._config.position == Position.BOTTOM_LEFT) {
-          return Selector.CONTAINER_BOTTOM_LEFT
+          return Selector.CONTAINER_BOTTOM_LEFT;
         }
-      }
+      };
 
       _proto._prepareContainer = function _prepareContainer() {
         if ($(this._getContainerId()).length === 0) {
-          const container = $('<div />').attr('id', this._getContainerId().replace('#', ''))
+          var container = $('<div />').attr('id', this._getContainerId().replace('#', ''));
 
           if (this._config.position == Position.TOP_RIGHT) {
-            container.addClass(ClassName.TOP_RIGHT)
+            container.addClass(ClassName.TOP_RIGHT);
           } else if (this._config.position == Position.TOP_LEFT) {
-            container.addClass(ClassName.TOP_LEFT)
+            container.addClass(ClassName.TOP_LEFT);
           } else if (this._config.position == Position.BOTTOM_RIGHT) {
-            container.addClass(ClassName.BOTTOM_RIGHT)
+            container.addClass(ClassName.BOTTOM_RIGHT);
           } else if (this._config.position == Position.BOTTOM_LEFT) {
-            container.addClass(ClassName.BOTTOM_LEFT)
+            container.addClass(ClassName.BOTTOM_LEFT);
           }
 
-          $('body').append(container)
+          $('body').append(container);
         }
 
         if (this._config.fixed) {
-          $(this._getContainerId()).addClass('fixed')
+          $(this._getContainerId()).addClass('fixed');
         } else {
-          $(this._getContainerId()).removeClass('fixed')
+          $(this._getContainerId()).removeClass('fixed');
         }
       } // Static
-
+      ;
 
       Toasts._jQueryInterface = function _jQueryInterface(option, config) {
         return this.each(function () {
-          const _options = $.extend({}, Default, config)
+          var _options = $.extend({}, Default, config);
 
-          const toast = new Toasts($(this), _options)
+          var toast = new Toasts($(this), _options);
 
           if (option === 'create') {
-            toast[option]()
+            toast[option]();
           }
-        })
-      }
+        });
+      };
 
-      return Toasts
-    }())
+      return Toasts;
+    }();
     /**
      * jQuery API
      * ====================================================
      */
 
 
-    $.fn[NAME] = Toasts._jQueryInterface
-    $.fn[NAME].Constructor = Toasts
+    $.fn[NAME] = Toasts._jQueryInterface;
+    $.fn[NAME].Constructor = Toasts;
 
     $.fn[NAME].noConflict = function () {
-      $.fn[NAME] = JQUERY_NO_CONFLICT
-      return Toasts._jQueryInterface
-    }
+      $.fn[NAME] = JQUERY_NO_CONFLICT;
+      return Toasts._jQueryInterface;
+    };
 
-    return Toasts
-  }(jQuery))
+    return Toasts;
+  }(jQuery);
 
-  exports.CardRefresh = CardRefresh
-  exports.CardWidget = CardWidget
-  exports.ControlSidebar = ControlSidebar
-  exports.DirectChat = DirectChat
-  exports.Dropdown = Dropdown
-  exports.Layout = Layout
-  exports.PushMenu = PushMenu
-  exports.Toasts = Toasts
-  exports.TodoList = TodoList
-  exports.Treeview = Treeview
+  exports.CardRefresh = CardRefresh;
+  exports.CardWidget = CardWidget;
+  exports.ControlSidebar = ControlSidebar;
+  exports.DirectChat = DirectChat;
+  exports.Dropdown = Dropdown;
+  exports.Layout = Layout;
+  exports.PushMenu = PushMenu;
+  exports.Toasts = Toasts;
+  exports.TodoList = TodoList;
+  exports.Treeview = Treeview;
 
-  Object.defineProperty(exports, '__esModule', {
-    value: true
-  })
-}))
-// # sourceMappingURL=adminlte.js.map
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));
+//# sourceMappingURL=adminlte.js.map

@@ -32,7 +32,9 @@ li.nav-item.has-treeview > ul.nav {
 }
 
 .navbar-nav .nav-link {
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -90,7 +92,9 @@ textarea {
 }
 
 .form-check {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-align: center;
   align-items: center;
   padding-left: 0;
 }
@@ -120,12 +124,16 @@ textarea {
 }
 
 .form-group .custom-control {
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-align: center;
   align-items: center;
 }
 
 .form-group .custom-control custom-control-label {
+  display: -ms-inline-flexbox;
   display: inline-flex;
+  -ms-flex-align: center;
   align-items: center;
 }
 
@@ -143,6 +151,7 @@ textarea {
   padding-right: .3rem;
   font-size: .8rem;
   height: calc(1.7rem + 2px);
+  -ms-flex-align: normal;
   align-items: normal;
   padding: .4rem;
 }
@@ -160,3 +169,5 @@ textarea {
   padding: .2rem .5rem;
 }
 
+
+/*# sourceMappingURL=adminlte-condensed.css.map */
