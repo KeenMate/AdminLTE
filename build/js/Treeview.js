@@ -172,6 +172,6 @@ const Treeview = (($) => {
 	}
 
 	return Treeview
-})(jQuery)
+})
 
 export default Treeview
