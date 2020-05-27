@@ -1861,6 +1861,8 @@
     return Toasts;
   }(jQuery);
 
+  Treeview($);
+
   exports.CardRefresh = CardRefresh;
   exports.CardWidget = CardWidget;
   exports.ControlSidebar = ControlSidebar;

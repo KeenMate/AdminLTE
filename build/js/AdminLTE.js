@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 import ControlSidebar from './ControlSidebar'
 import Layout from './Layout'
 import PushMenu from './PushMenu'
@@ -8,6 +10,8 @@ import CardWidget from './CardWidget'
 import CardRefresh from './CardRefresh'
 import Dropdown from './Dropdown'
 import Toasts from './Toasts'
+
+Treeview($)
 
 export {
   ControlSidebar,
