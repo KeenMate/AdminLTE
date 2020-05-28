@@ -190,3 +190,65 @@ textarea {
 	padding: .2rem .5rem;
 }
 
+.form-group {
+	select {
+		&.form-control {
+			&.is-invalid {
+				background-position: right calc(.375em + .6rem) center !important;
+			}
+		}
+	}
+}
+
+.card-body.p-0 {
+	& > .note-editor {
+		margin-bottom: 0 !important;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+}
+
+.content-wrapper {
+	padding-top: .6rem;
+}
+
+.card-tools {
+	height: 0.875em;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.table {
+	tr {
+		& > td {
+			&:last-child {
+				display: flex;
+				justify-content: flex-end;
+			}
+
+			& > button {
+				& > i {
+					font-size: .6rem;
+				}
+			}
+
+			&:last-child {
+				& > button {
+					&:not(:last-child) {
+						margin-right: 3px;
+					}
+				}
+			}
+		}
+	}
+}
+
+textarea {
+	font-family: 'Fira Code', monospace;
+}
+
+.note-status-output {
+	height: auto !important;
+}
+
