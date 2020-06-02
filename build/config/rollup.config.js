@@ -9,17 +9,29 @@ const globals = {
 
 export default {
   input  : 'build/js/AdminLTE.js',
-  output : {
-    banner: `/*!
- * AdminLTE v${pkg.version} (${pkg.homepage})
- * Copyright 2014-${year} ${pkg.author}
- * Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
- */`,
-    file  : 'dist/js/adminlte.js',
-    format: 'umd',
-    globals,
-    name  : 'adminlte'
-  },
+  output : [
+		{
+			banner: `/*!
+	* AdminLTE v${pkg.version} (${pkg.homepage})
+	* Copyright 2014-${year} ${pkg.author}
+	* Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
+	*/`,
+			file  : 'dist/js/adminlte.esm.js',
+			format: 'esm',
+			globals
+		},
+		{
+			banner: `/*!
+	* AdminLTE v${pkg.version} (${pkg.homepage})
+	* Copyright 2014-${year} ${pkg.author}
+	* Licensed under MIT (https://github.com/ColorlibHQ/AdminLTE/blob/master/LICENSE)
+	*/`,
+			file  : 'dist/js/adminlte.umd.js',
+			format: 'umd',
+			globals,
+			name  : 'adminlte'
+		},
+	],
   plugins: [
     babel({
       exclude: 'node_modules/**',
