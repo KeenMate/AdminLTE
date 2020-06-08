@@ -3,11 +3,11 @@
   type: docker
   
   steps:
-    - name: build
-      image: node:12
-      commands:
-        - npm install
-        - npm run production
+#     - name: build
+#       image: node:12
+#       commands:
+#         - npm install
+#         - npm run production
   
     - name: release_dev
       image: plugins/docker
