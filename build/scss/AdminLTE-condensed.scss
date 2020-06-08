@@ -39,8 +39,12 @@ li.nav-item.has-treeview > ul.nav {
 	top: .3rem;
 }
 
-.main-header .nav-link {
-	height: 2rem;
+.main-header {
+	z-index: auto;
+
+	.nav-link {
+		height: 2rem;
+	}
 }
 
 .navbar-nav .nav-link {
@@ -114,6 +118,23 @@ textarea {
 
 .card-header {
 	padding: 0.35rem 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	& > .card-title {
+		float: none;
+		flex: 1
+	}
+
+	& > .card-tools {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		float: none;
+		margin-right: 0;
+		height: .5rem;
+	}
 }
 
 .card-body,
@@ -212,20 +233,13 @@ textarea {
 	padding-top: .6rem;
 }
 
-.card-tools {
-	height: 0.875em;
-	display: flex;
-	align-items: flex-end;
-	justify-content: center;
-}
-
 .table {
 	tr {
 		& > td {
-			&:last-child {
-				display: flex;
-				justify-content: flex-end;
-			}
+			// &:last-child {
+			// 	display: flex;
+			// 	justify-content: flex-end;
+			// }
 
 			& > button {
 				& > i {

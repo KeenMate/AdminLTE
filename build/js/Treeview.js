@@ -5,6 +5,8 @@
  * --------------------------------------------
  */
 
+import jQuery from "jquery"
+
 const Treeview = (($) => {
 	/**
    * Constants
