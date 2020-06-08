@@ -4,7 +4,7 @@
   "version": "3.0.4",
   "license": "MIT",
   "author": "Colorlib <http://colorlib.com>",
-  "main": "dist/js/adminlte.min.js",
+  "main": "dist/js/adminlte.umd.min.js",
   "scripts": {
     "css": "npm-run-all --sequential css-compile css-prefix css-minify",
     "css-all": "npm-run-all --sequential css-compile css-compile-splits css-prefix css-minify css-minify-splits",
