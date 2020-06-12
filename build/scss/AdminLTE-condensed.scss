@@ -108,12 +108,16 @@ textarea {
 	display: flex;
 	align-items: center;
 	padding-left: 0;
-}
 
-.form-check .form-check-input {
-	position: static;
-	margin-top: 0;
-	margin-left: 0;
+	.form-check-input {
+		position: static;
+		margin-top: 0;
+		margin-left: 0;
+	}
+
+	.form-check-label {
+		margin-left: .3rem;
+	}
 }
 
 .card-header {
@@ -133,7 +137,10 @@ textarea {
 		justify-content: center;
 		float: none;
 		margin-right: 0;
-		height: .5rem;
+
+		.btn-tool {
+			margin: 0;
+		}
 	}
 }
 
@@ -147,11 +154,11 @@ textarea {
 }
 
 .form-group {
-	margin-bottom: .5rem;
-
 	&:not(.row) {
 		margin: 0;
 	}
+
+	margin-bottom: .5rem !important;
 
 	.custom-control {
 		display: flex;
@@ -165,13 +172,26 @@ textarea {
 	}
 }
 
-.form-group .custom-control custom-control-label {
-	display: inline-flex;
-	align-items: center;
-}
+.form-group {
+	.custom-control {
+		.custom-control-label {
+			display: inline-flex;
+			align-items: center;
 
-.form-group .custom-control custom-control-label::before {
-	margin: auto
+			&::before,
+			&::after {
+				top: .1rem;
+			}
+		}
+
+		&.custom-switch {
+			.custom-control-label {
+				&::after {
+					top: .2rem;
+				}
+			}
+		}
+	}
 }
 
 .form-group label {
@@ -265,4 +285,6 @@ textarea {
 .note-status-output {
 	height: auto !important;
 }
+
+
 
