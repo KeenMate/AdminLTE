@@ -125,6 +125,7 @@ textarea {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	height: 2.5rem;
 
 	& > .card-title {
 		float: none;
@@ -256,6 +257,8 @@ textarea {
 .table {
 	tr {
 		& > td {
+			vertical-align: middle;
+
 			// &:last-child {
 			// 	display: flex;
 			// 	justify-content: flex-end;
@@ -287,4 +290,20 @@ textarea {
 }
 
 
+.modal-content {
+	.modal-header {
+		padding: .3rem;
 
+		h4 {
+			font-size: 1rem;
+		}
+	}
+
+	.modal-body {
+		padding: .3rem;
+	}
+
+	.modal-footer {
+		padding: 0;
+	}
+}
