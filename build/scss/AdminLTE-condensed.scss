@@ -299,8 +299,10 @@ textarea {
 
 
 .modal-content {
+	$modal-padding: .7rem;
+
 	.modal-header {
-		padding: .3rem;
+		padding: $modal-padding;
 
 		h4 {
 			font-size: 1rem;
@@ -313,11 +315,11 @@ textarea {
 	}
 
 	.modal-body {
-		padding: .3rem;
+		padding: $modal-padding;
 	}
 
 	.modal-footer {
-		padding: 0;
+		padding: $modal-padding;
 	}
 }
 
