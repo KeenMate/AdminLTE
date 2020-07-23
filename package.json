@@ -42,7 +42,7 @@
     "sync": "browser-sync start --server --files *.html pages/ dist/",
     "watch": "npm-run-all --parallel watch-css watch-js",
     "watch-css": "nodemon --watch build/scss -e scss -x \"npm run css\"",
-    "watch-js": "nodemon --watch build/js -e js -x \"npm run js\""
+		"watch-js": "nodemon --watch build/js -e js -x \"npm run js\""
   },
   "keywords": [
     "css",
