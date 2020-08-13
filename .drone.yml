@@ -17,8 +17,8 @@
         event:
           - push
       settings:
-        repo: registry.ubu-002.km8.es/admin-lte-dev
-        registry: registry.ubu-002.km8.es
+        repo: registry.km8.es/admin-lte-dev
+        registry: registry.km8.es
         username:
           from_secret: docker_repo_user
         password:
@@ -32,7 +32,7 @@
         event:
           - push
       settings:
-        host: web-01.km8.es
+        host: 10.0.0.7
         port: 22
         username:
           from_secret: web-01_ssh_user
