@@ -339,3 +339,12 @@ textarea {
 button {
 	padding: .3rem;
 }
+
+.dropdown-menu {
+	padding: 0 !important;
+	width: 100%;
+
+	& > .dropdown-item {
+		padding: .25rem .5rem !important;
+	}
+}
