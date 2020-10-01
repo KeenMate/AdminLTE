@@ -16,9 +16,9 @@ body {
 .nav-link {
 	padding: 0.15rem .3rem;
 
-	&.active {
-		margin-right: .5rem;
-	}
+	// &.active {
+	// 	margin-right: .5rem;
+	// }
 }
 
 ul.nav.nav-tabs {
@@ -152,6 +152,10 @@ textarea {
 			float: none;
 			flex: 1;
 			font-size: 1rem;
+		}
+
+		& > button + button {
+			margin-left: .3rem;
 		}
 	
 		& > .card-tools {
