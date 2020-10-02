@@ -31205,10 +31205,6 @@ body {
   padding: 0.15rem .3rem;
 }
 
-.nav-link.active {
-  margin-right: .5rem;
-}
-
 ul.nav.nav-tabs a.nav-link.active {
   margin-right: 0 !important;
 }
@@ -31338,6 +31334,10 @@ textarea {
   -ms-flex: 1;
   flex: 1;
   font-size: 1rem;
+}
+
+.card .card-header > button + button {
+  margin-left: .3rem;
 }
 
 .card .card-header > .card-tools {
