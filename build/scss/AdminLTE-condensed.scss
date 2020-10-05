@@ -1,3 +1,7 @@
+$main_header_height: 2.45rem;
+$main_header_padding_vertical: .2rem;
+$main_header_padding_horizontal: .5rem;
+
 /* GLOBALS */
 body {
 	font-size: 0.9rem;
@@ -5,9 +9,9 @@ body {
 }
 
 /* NAVIGATION */
-.navbar {
-	padding: .2rem .5rem;
-}
+// .navbar {
+// 	padding: .2rem .5rem;
+// }
 
 .sidebar {
 	padding: 0 .2rem;
@@ -49,6 +53,8 @@ li.nav-item.has-treeview > ul.nav {
 
 .main-header {
 	z-index: auto;
+	height: $main_header_height;
+	padding: $main_header_padding_vertical $main_header_padding_horizontal;
 
 	.nav-link {
 		height: 2rem;
@@ -220,8 +226,9 @@ textarea {
 
 		&.custom-switch {
 			.custom-control-label {
+				&::after,
 				&::after {
-					top: .2rem;
+					top: unset;
 				}
 			}
 		}
@@ -256,11 +263,6 @@ textarea {
 	line-height: 1;
 }
 
-
-.custom-control-label::after {
-	/* content: none; */
-}
-
 .content-header {
 	padding: .2rem .5rem;
 }
@@ -277,6 +279,7 @@ textarea {
 
 .content-wrapper {
 	padding-top: .6rem;
+	height: calc(100vh - $main_header_height - (2 * $main_header_padding_vertical));
 }
 
 .table {
