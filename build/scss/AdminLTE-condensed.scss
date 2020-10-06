@@ -13,6 +13,20 @@ body {
 // 	padding: .2rem .5rem;
 // }
 
+// setting propper height to fill background over whole render area
+.sidebar-mini {
+	height: 100vh;
+
+	& > .wrapper {
+		height: 100%;
+
+		& > .content-wrapper {
+			padding-top: .6rem;
+			height: 100%;
+		}
+	}
+}
+
 .sidebar {
 	padding: 0 .2rem;
 }
@@ -277,11 +291,6 @@ textarea {
 	}
 }
 
-.content-wrapper {
-	padding-top: .6rem;
-	height: calc(100vh - $main_header_height - (2 * $main_header_padding_vertical));
-}
-
 .table {
 	tr {
 		& > td {
@@ -357,7 +366,7 @@ button {
 }
 
 aside {
-	.main-sidebar {
+	&.main-sidebar {
 		.brand-link {
 			padding: .275rem .5rem;
 		}
