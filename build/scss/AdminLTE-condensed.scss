@@ -15,14 +15,14 @@ body {
 
 // setting propper height to fill background over whole render area
 .sidebar-mini {
-	height: 100vh;
+	min-height: 100vh;
 
 	& > .wrapper {
 		height: 100%;
 
 		& > .content-wrapper {
 			padding-top: .6rem;
-			height: 100%;
+			height: calc(100% - #{$main_header_height});
 		}
 	}
 }
