@@ -112,6 +112,13 @@ select.form-control > option {
 
 .custom-file-label {
 	height: calc(1.7rem + 2px);
+	display: flex;
+	align-items: center;
+
+	&::after {
+		display: flex;
+		align-items: center;
+	}
 }
 
 .custom-file-label::after {
