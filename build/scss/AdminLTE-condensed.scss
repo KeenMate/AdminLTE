@@ -21,8 +21,15 @@ body {
 		height: 100%;
 
 		& > .content-wrapper {
+			display: flex;
+			flex-direction: column;
+
 			padding-top: .6rem;
 			height: calc(100% - #{$main_header_height});
+
+			& > .content {
+				flex: 1
+			}
 		}
 	}
 }
