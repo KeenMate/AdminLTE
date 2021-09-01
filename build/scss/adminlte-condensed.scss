@@ -1,0 +1,389 @@
+$main-header-height: 2.45rem;
+$main-header-padding-vertical: .2rem;
+$main-header-padding-horizontal: .5rem;
+
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:ital,wght@0,300;0,400;0,700;1,400&display=swap");
+
+/* GLOBALS */
+body {
+  font-size: .9rem;
+  font-family: "Fira Sans Condensed", Arial, sans-serif;
+}
+
+/* NAVIGATION */
+// .navbar {
+// 	padding: .2rem .5rem;
+// }
+
+// setting propper height to fill background over whole render area
+.sidebar-mini {
+  min-height: 100vh;
+
+  > .wrapper {
+    height: 100%;
+
+    > .content-wrapper {
+      display: flex;
+      flex-direction: column;
+
+      padding-top: .6rem;
+      height: calc(100% - #{$main-header-height});
+
+      > .content {
+        flex: 1;
+      }
+    }
+  }
+}
+
+.sidebar {
+  padding: 0 .2rem;
+}
+
+.nav-link {
+  padding: .15rem .3rem;
+
+  // &.active {
+  // 	margin-right: .5rem;
+  // }
+}
+
+ul.nav.nav-tabs {
+  a.nav-link {
+    &.active {
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.nav-sidebar {
+  .nav-header:not(:first-of-type) {
+    padding: .7rem .5rem .5rem;
+  }
+}
+
+.nav-sidebar > .nav-item .nav-icon {
+  margin-right: 0;
+}
+
+li.nav-item.has-treeview > ul.nav {
+  padding-left: .35rem;
+}
+
+.nav-sidebar .nav-link > .right,
+.nav-sidebar .nav-link > p > .right {
+  top: .3rem;
+}
+
+.main-header {
+  z-index: auto;
+  height: $main-header-height;
+  padding: $main-header-padding-vertical $main-header-padding-horizontal;
+
+  .nav-link {
+    height: 2rem;
+  }
+}
+
+.navbar-nav .nav-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar-expand .navbar-nav .nav-link {
+  padding-left: .5rem;
+  padding-right: .5rem;
+}
+
+.main-footer {
+  padding: .3rem;
+}
+
+/* FORMS and FORM CONTROLS */
+
+.form-control {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  height: calc(1.7rem + 2px);
+  font-size: .9rem;
+}
+
+select.form-control {
+  padding: 0;
+}
+
+select.form-control > option {
+  padding-left: .25rem;
+}
+
+.custom-file-input {
+  height: calc(1.7rem + 2px);
+}
+
+.custom-file-label {
+  height: calc(1.7rem + 2px);
+  display: flex;
+  align-items: center;
+
+  &::after {
+    display: flex;
+    align-items: center;
+    padding-left: .3rem;
+    padding-right: .3rem;
+    height: calc(1.7rem + 1px);
+    border-bottom: 1px solid #ced4da;
+  }
+}
+
+textarea {
+  min-height: 80px;
+  font-family: "Fira Code", monospace;
+
+}
+
+.btn {
+  padding-left: .3rem;
+  padding-right: .3rem;
+  line-height: 1;
+  font-size: .8rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  padding-left: 0;
+
+  .form-check-input {
+    position: static;
+    margin-top: 0;
+    margin-left: 0;
+  }
+
+  .form-check-label {
+    margin-left: .3rem;
+  }
+}
+
+.accordion {
+  > .card {
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
+
+    > .card-header {
+      background-color: rgb(248, 248, 248);
+    }
+  }
+}
+
+.card {
+  .card-header {
+    padding: .35rem .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5rem;
+
+    > .card-title {
+      float: none;
+      flex: 1;
+      font-size: 1rem;
+    }
+
+    > button + button {
+      margin-left: .3rem;
+    }
+
+    > .card-tools {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      float: none;
+      margin-right: 0;
+
+      .btn-tool {
+        margin: 0;
+      }
+    }
+  }
+
+  .card-body,
+  .card-footer {
+    padding: .5rem;
+  }
+
+  .card-body {
+    &.p-0 {
+      > .note-editor {
+        margin-bottom: 0 !important;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+}
+
+.form-group {
+  &:not(.row) {
+    margin: 0;
+  }
+
+  margin-bottom: .5rem !important;
+
+  .custom-control {
+    display: flex;
+    align-items: center;
+
+    .custom-control-label {
+      display: inline-flex;
+      align-items: center;
+
+      &::before,
+      &::after {
+        top: .1rem;
+      }
+    }
+
+    &.custom-switch {
+      .custom-control-label {
+        &::before,
+        &::after {
+          top: unset;
+        }
+      }
+    }
+
+    select {
+      &.form-control {
+        &.is-invalid {
+          background-position: right calc(.375em + .6rem) center !important;
+        }
+      }
+    }
+  }
+
+  .invalid-feedback,
+  .valid-feedback {
+    &.empty {
+      margin-top: 0;
+    }
+  }
+}
+
+.form-group label {
+  font-size: .8rem;
+  margin-bottom: 0 !important;
+}
+
+.input-group-append {
+  .input-group-text {
+    padding-left: .3rem;
+    padding-right: .3rem;
+    font-size: .8rem;
+    height: calc(1.7rem + 2px);
+    align-items: normal;
+  }
+}
+
+.input-group-prepend {
+  .input-group-text {
+    font-size: .8rem;
+    height: calc(1.7rem + 2px);
+    align-items: normal;
+    padding: .4rem;
+  }
+}
+
+.input-group > .input-group-prepend .input-group-text {
+  line-height: 1;
+}
+
+.content-header {
+  padding: .2rem .5rem;
+}
+
+.table {
+  tr {
+    > td {
+      vertical-align: middle;
+
+      // &:last-child {
+      // 	display: flex;
+      // 	justify-content: flex-end;
+      // }
+
+      > button {
+        > i {
+          font-size: .6rem;
+        }
+      }
+
+      &:last-child {
+        > button {
+          &:not(:last-child) {
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.note-status-output {
+  height: auto !important;
+}
+
+
+.modal-content {
+  $modal-padding: .7rem;
+
+  .modal-header {
+    padding: $modal-padding;
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    .close {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .modal-body {
+    padding: $modal-padding;
+  }
+
+  .modal-footer {
+    padding: $modal-padding;
+  }
+}
+
+button {
+  padding: .3rem;
+}
+
+.dropdown-menu {
+  padding: 0 !important;
+  width: 100%;
+
+  > .dropdown-item {
+    padding: .25rem .5rem !important;
+  }
+}
+
+aside {
+  &.main-sidebar {
+    .brand-link {
+      padding: .275rem .5rem;
+    }
+  }
+}
+
+span.badge {
+  display: inline-flex;
+  padding: .25rem .4rem;
+  font-size: .69rem;
+  align-items: center;
+  height: 1.2rem;
+}
