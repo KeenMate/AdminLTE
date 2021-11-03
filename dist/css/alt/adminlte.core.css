@@ -13173,7 +13173,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
 
 .sidebar {
   height: calc(100% - (3.5rem + 1px));
-  overflow-x: none;
+  overflow-x: hidden;
   overflow-y: initial;
   padding-bottom: 0;
   padding-left: 0.5rem;
